@@ -1,32 +1,22 @@
 package com.crenu.kiosk.placeOrder;
 
+import com.crenu.kiosk.menu.Category;
 import com.crenu.kiosk.menu.Menu;
 
-public class OrderedItem {
-    private String menuName;
-    private int unitPrice;
-    private String category;
+public class OrderedItem extends Menu {
     private int count;
 
-    public OrderedItem(String menuName, int unitPrice, String category, int count) {
-        this.menuName = menuName;
-        this.unitPrice = unitPrice;
-        this.category = category;
+    public OrderedItem(String menuName, int unitPrice, Category category, int count) {
+        super(menuName, unitPrice, category);  // Call to super class (Menu) constructor
         this.count = count;
     }
 
     public int getTotalPrice() {
-        return unitPrice * count;
+        return super.getPrice() * count;  // Using price from the Menu class
     }
 
     public void increaseCount() {
         count++;
-    }
-
-    public void decreaseCount() {
-        if (count > 0) {
-            count--;
-        }
     }
 
     public int getCount() {
@@ -39,39 +29,13 @@ public class OrderedItem {
         }
     }
 
-    public String getMenuName() {
-        return menuName;
-    }
-
-    public void setMenuName(String menuName) {
-        this.menuName = menuName;
-    }
-
-    public int getUnitPrice() {
-        return unitPrice;
-    }
-
-    public void setUnitPrice(int unitPrice) {
-        this.unitPrice = unitPrice;
-    }
-
-    public String getCategory() {
-        return category;
-    }
-
-    public void setCategory(String category) {
-        this.category = category;
-    }
-
     @Override
     public String toString() {
         return "OrderedItem{" +
-                "menuName='" + menuName + '\'' +
-                ", unitPrice=" + unitPrice +
-                ", category='" + category + '\'' +
+                "menuName='" + super.getMenuName() + '\'' +  // menuName is inherited from Menu
+                ", unitPrice=" + super.getPrice() +
+                ", category='" + super.getCategory() + '\'' +  // category is inherited from Menu
                 ", count=" + count +
                 '}';
     }
 }
-
-
