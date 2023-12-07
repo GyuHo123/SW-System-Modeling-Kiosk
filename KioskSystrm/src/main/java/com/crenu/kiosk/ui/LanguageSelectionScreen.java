@@ -8,17 +8,16 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class LanguageSelectionScreen extends JFrame {
+import static com.crenu.kiosk.ui.UIManager.*;
+
+public class LanguageSelectionScreen{
+
 
     public LanguageSelectionScreen() {
-        setTitle("Language Selection");
-        setSize(300, 200);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setLayout(new FlowLayout());
-
+        main.setTitle("Language Selection");
         JButton btnEnglish = new JButton("English");
         JButton btnKorean = new JButton("한국어");
-
+        JPanel panel = panels.get(LANGUAGE_PANELNAME);
         btnEnglish.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -33,8 +32,8 @@ public class LanguageSelectionScreen extends JFrame {
             }
         });
 
-        add(btnEnglish);
-        add(btnKorean);
+        panel.add(btnEnglish);
+        panel.add(btnKorean);
     }
 
     private void openMenuDisplayScreen(String language) {
@@ -45,6 +44,6 @@ public class LanguageSelectionScreen extends JFrame {
 
         MenuDisplayScreen menuDisplayScreen = new MenuDisplayScreen(language, menuManager);
         menuDisplayScreen.setVisible(true);
-        setVisible(false); // Hide the language selection screen
+
     }
 }
