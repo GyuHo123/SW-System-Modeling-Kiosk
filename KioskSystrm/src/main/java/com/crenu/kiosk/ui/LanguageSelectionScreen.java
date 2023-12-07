@@ -8,16 +8,22 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import static com.crenu.kiosk.KioskSystem.uiManager;
+import static com.crenu.kiosk.ui.PanelNameEntity.LANGUAGE_PANELNAME;
 import static com.crenu.kiosk.ui.UIManager.*;
 
 public class LanguageSelectionScreen{
 
 
-    public LanguageSelectionScreen() {
-        main.setTitle("Language Selection");
+    public static void init() {
+        uiManager.setTitle("Language Selection");
+        JPanel panel = new JPanel();
+        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+        uiManager.panels.put(LANGUAGE_PANELNAME, panel);
+        uiManager.add(panel, BorderLayout.CENTER);
+
         JButton btnEnglish = new JButton("English");
         JButton btnKorean = new JButton("한국어");
-        JPanel panel = panels.get(LANGUAGE_PANELNAME);
         btnEnglish.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -31,12 +37,12 @@ public class LanguageSelectionScreen{
                 openMenuDisplayScreen("한국어");
             }
         });
-
-        panel.add(btnEnglish);
-        panel.add(btnKorean);
+        uiManager.addComponent(LANGUAGE_PANELNAME,btnEnglish);
+        uiManager.addComponent(LANGUAGE_PANELNAME,btnKorean);
     }
 
-    private void openMenuDisplayScreen(String language) {
+
+    private static void openMenuDisplayScreen(String language) {
         MenuManager menuManager = new MenuManager();
         menuManager.addMenuItem(new com.crenu.kiosk.menu.Menu("Bulgogi Burger", 8, "Main"));
         menuManager.addMenuItem(new com.crenu.kiosk.menu.Menu("Cheese Burger", 7, "Main"));

@@ -3,9 +3,12 @@ package com.crenu.kiosk;
 import com.crenu.kiosk.ui.InitialScreen;
 import com.crenu.kiosk.ui.UIManager;
 
+import javax.swing.*;
+
 public class KioskSystem {
+    public static UIManager uiManager;
     public static void main(String[] args) {
-        UIManager.main = new UIManager();
-        new InitialScreen();
+        uiManager = new UIManager();
+        InitialScreen.init();
     }
 }

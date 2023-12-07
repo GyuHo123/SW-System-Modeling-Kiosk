@@ -7,21 +7,26 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class InitialScreen extends UIManager{
+import static com.crenu.kiosk.KioskSystem.uiManager;
+import static com.crenu.kiosk.ui.PanelNameEntity.INITAL_PANELNAME;
+import static com.crenu.kiosk.ui.PanelNameEntity.LANGUAGE_PANELNAME;
 
-    public InitialScreen() {
+public class InitialScreen{
+    public static void init() {
+        JPanel panel = new JPanel();
+        panel.setLayout(new FlowLayout());
 
-        JPanel panel = panels.get(INITAL_PANELNAME);
         JButton startButton = new JButton("Start");
         startButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                LanguageSelectionScreen languageSelectionScreen = new LanguageSelectionScreen();
-                panels.get(LANGUAGE_PANELNAME).setVisible(true);
-                panel.setVisible(false);
+               LanguageSelectionScreen.init();
+                uiManager.allPanelVisibleOff();
+                uiManager.panelSetVisble(LANGUAGE_PANELNAME, true);
             }
         });
         panel.add(startButton);
-        panel.setVisible(true);
+        uiManager.addPanel(INITAL_PANELNAME, panel, BorderLayout.CENTER);
+        uiManager.setVisible(true);
     }
 }
