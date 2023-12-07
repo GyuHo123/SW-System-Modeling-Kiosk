@@ -3,15 +3,13 @@ package com.crenu.kiosk.menu;
 public class Menu {
     private String menuName;
     private Integer price;
-    private String category;
+    private Category category;
 
-    public Menu(String menuName, Integer price, String category) {
+    public Menu(String menuName, Integer price, Category category) {
         this.menuName = menuName;
         this.price = price;
         this.category = category;
     }
-
-    // Getters and Setters
     public String getMenuName() {
         return menuName;
     }
@@ -20,11 +18,7 @@ public class Menu {
         return price;
     }
 
-    public void setPrice(Integer price){
-        this.price = price;
-    }
-
-    public String getCategory() {
+    public Category getCategory() {
         return category;
     }
 

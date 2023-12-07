@@ -1,31 +1,41 @@
 package com.crenu.kiosk.placeOrder;
 
+import com.crenu.kiosk.menu.Category;
 import com.crenu.kiosk.menu.Menu;
 
 public class OrderedItem extends Menu {
-    private Integer count;
-    private Integer unitPrice;
+    private int count;
 
-    public OrderedItem(String menuName, Integer price, String category, Integer count) {
-        super(menuName, price, category);
-        this.unitPrice = price;
+    public OrderedItem(String menuName, int unitPrice, Category category, int count) {
+        super(menuName, unitPrice, category);  // Call to super class (Menu) constructor
         this.count = count;
-        setPrice(unitPrice * count);
+    }
+
+    public int getTotalPrice() {
+        return super.getPrice() * count;  // Using price from the Menu class
     }
 
     public void increaseCount() {
         count++;
-        setPrice(unitPrice * count);
     }
 
-    public void decreaseCount() {
-        if (count > 0) {
-            count--;
-            setPrice(unitPrice * count);
+    public int getCount() {
+        return count;
+    }
+
+    public void setCount(int count) {
+        if (count >= 0) {
+            this.count = count;
         }
     }
 
-    public Integer getCount() {
-        return count;
+    @Override
+    public String toString() {
+        return "OrderedItem{" +
+                "menuName='" + super.getMenuName() + '\'' +  // menuName is inherited from Menu
+                ", unitPrice=" + super.getPrice() +
+                ", category='" + super.getCategory() + '\'' +  // category is inherited from Menu
+                ", count=" + count +
+                '}';
     }
 }

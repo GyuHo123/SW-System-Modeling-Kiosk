@@ -1,6 +1,6 @@
 package com.crenu.kiosk.placeOrder;
 
-import java.util.List;
+import com.crenu.kiosk.placeOrder.ModifyOrder;
 
 public class MakeOrder {
     private ModifyOrder modifyOrder;
@@ -10,17 +10,20 @@ public class MakeOrder {
     }
 
     public void finalizeOrder() {
-        int totalAmount = modifyOrder.getTotalPrice();
-        proceedToPayment(totalAmount);
+        if (!modifyOrder.getItems().isEmpty()) {
+            int totalAmount = modifyOrder.getTotalPrice();
+            proceedToPayment(totalAmount);
+        } else {
+            System.out.println("Order is empty. Cannot proceed to payment.");
+        }
     }
 
     private void proceedToPayment(int totalAmount) {
-        //TODO UI 구현 후 화면 넘어가도록 설계
+        // Actual payment implementation here
         System.out.println("Proceeding to payment with total amount: " + totalAmount);
     }
 
     public void displayCurrentOrder() {
-        //TODO UI 구현 후 호출
         modifyOrder.displayOrder();
     }
 }
