@@ -50,6 +50,5 @@ public class LanguageSelectionScreen{
 
         MenuDisplayScreen menuDisplayScreen = new MenuDisplayScreen(language, menuManager);
         menuDisplayScreen.setVisible(true);
-
     }
 }

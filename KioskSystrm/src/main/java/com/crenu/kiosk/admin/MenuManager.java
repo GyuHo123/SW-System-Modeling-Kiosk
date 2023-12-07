@@ -71,8 +71,15 @@ public class MenuManager extends JFrame {
         menuPanel.repaint();
     }
 
+    public Menu getMenuItem(String menuItemName) {
+        return menuItems.stream()
+                .filter(menu -> menu.getMenuName().equals(menuItemName))
+                .findFirst()
+                .orElse(null); // Returns null if the item is not found
+    }
+
     public List<Menu> getMenuItems() {
-        return new ArrayList<>(menuItems); // Return a copy to prevent external modification
+        return menuItems;
     }
 
     public void addMenuItem(Menu menu) {

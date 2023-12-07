@@ -15,8 +15,6 @@ public class UIManager extends JFrame {
         panels = new HashMap<>();
     }
 
-
-
     public void panelSetVisble(String panelName, boolean state) {
         panels.get(panelName).setVisible(state);
     }
