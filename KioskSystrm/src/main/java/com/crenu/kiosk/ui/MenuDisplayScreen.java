@@ -1,5 +1,6 @@
 package com.crenu.kiosk.ui;
 
+import com.crenu.kiosk.menu.Category;
 import com.crenu.kiosk.placeOrder.OrderedItem;
 import com.crenu.kiosk.admin.MenuManager;
 import com.crenu.kiosk.menu.Menu;
@@ -10,8 +11,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class MenuDisplayScreen extends JFrame {
-    private String currentLanguage;
+public class MenuDisplayScreen extends JPanel {
     private MenuManager menuManager;
     private JPanel menuPanel;
     private JPanel cartPanel;
@@ -19,33 +19,35 @@ public class MenuDisplayScreen extends JFrame {
     private JButton paymentButton;
     private Map<String, OrderedItem> cartItems;
 
-    public MenuDisplayScreen(String language, MenuManager menuManager) {
-        this.currentLanguage = language;
-        this.menuManager = menuManager;
+    public MenuDisplayScreen() {
+        this.menuManager = new MenuManager();
+        menuManager.addMenuItem(new com.crenu.kiosk.menu.Menu("Bulgogi Burger", 8, Category.MAIN));
+        menuManager.addMenuItem(new com.crenu.kiosk.menu.Menu("Cheese Burger", 7, Category.MAIN));
+        menuManager.addMenuItem(new Menu("Veggie Burger", 6, Category.MAIN));
+        menuManager.addMenuItem(new Menu("Cola", 1, Category.DRINK));
+        menuManager.addMenuItem(new Menu("Water", 1, Category.DRINK));
+        menuManager.addMenuItem(new Menu("Lemonade", 1, Category.DRINK));
+        menuManager.addMenuItem(new Menu("Cola", 1, Category.SIDE));
+        menuManager.addMenuItem(new Menu("Water", 1, Category.SIDE));
+        menuManager.addMenuItem(new Menu("Lemonade", 1, Category.SIDE));
         this.cartItems = new HashMap<>();
         initializeUI();
     }
 
     private void initializeUI() {
-        setTitle("Menu Display - " + currentLanguage);
-        setSize(800, 600);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
 
-        // Menu items panel
         menuPanel = new JPanel();
         menuPanel.setLayout(new BoxLayout(menuPanel, BoxLayout.Y_AXIS));
         JScrollPane menuScrollPane = new JScrollPane(menuPanel);
         add(menuScrollPane, BorderLayout.CENTER);
 
-        // Cart panel
         cartPanel = new JPanel();
         cartPanel.setPreferredSize(new Dimension(300, 600));
         cartPanel.setLayout(new BoxLayout(cartPanel, BoxLayout.Y_AXIS));
         JScrollPane cartScrollPane = new JScrollPane(cartPanel);
         add(cartScrollPane, BorderLayout.EAST);
 
-        // Total amount and payment button
         totalAmountLabel = new JLabel("Total: $0.00");
         paymentButton = new JButton("Pay");
         paymentButton.addActionListener(e -> proceedToPayment());
@@ -55,6 +57,7 @@ public class MenuDisplayScreen extends JFrame {
 
         updateMenuDisplay();
     }
+
 
     private double calculateTotalAmount() {
         return cartItems.values().stream()
@@ -66,12 +69,14 @@ public class MenuDisplayScreen extends JFrame {
         menuPanel.removeAll();
         List<Menu> menuItems = menuManager.getMenuItems();
         for (Menu item : menuItems) {
-            JPanel itemPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-            JButton selectButton = new JButton("Select " + item.getMenuName());
-            selectButton.addActionListener(e -> selectItem(item)); // Pass the Menu item
-            itemPanel.add(new JLabel(item.toString()));
-            itemPanel.add(selectButton);
-            menuPanel.add(itemPanel);
+            if(item.getCategory() == Category.MAIN){
+                JPanel itemPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+                JButton selectButton = new JButton("Select " + item.getMenuName());
+                selectButton.addActionListener(e -> selectItem(item));  
+                itemPanel.add(new JLabel(item.toString()));
+                itemPanel.add(selectButton);
+                menuPanel.add(itemPanel);
+            }
         }
         menuPanel.revalidate();
         menuPanel.repaint();
@@ -85,6 +90,7 @@ public class MenuDisplayScreen extends JFrame {
     private void updateCartDisplay() {
         cartPanel.removeAll();
         cartPanel.add(totalAmountLabel);
+        cartPanel.add(paymentButton);
         for (Map.Entry<String, OrderedItem> entry : cartItems.entrySet()) {
             JPanel itemPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
             JLabel itemLabel = new JLabel(entry.getValue().getMenuName() + " x " + entry.getValue().getCount());
@@ -104,14 +110,9 @@ public class MenuDisplayScreen extends JFrame {
         }
         double totalAmount = calculateTotalAmount();
 
-        // Update the total amount label with the new total
         totalAmountLabel.setText("Total: $" + String.format("%.2f", totalAmount));
-
-        // Revalidate and repaint the label to ensure the updated text is displayed
         totalAmountLabel.revalidate();
         totalAmountLabel.repaint();
-
-        // You may also need to revalidate and repaint the panel that contains the total label
         cartPanel.revalidate();
         cartPanel.repaint();
     }
@@ -135,54 +136,78 @@ public class MenuDisplayScreen extends JFrame {
     }
 
     private void selectItem(Menu mainItem) {
-        int mainItemPrice = mainItem.getPrice(); // Assuming getPrice() returns int
+        int mainItemPrice = mainItem.getPrice();  
 
         String side = selectSide();
         String drink = selectDrink();
 
-        // Create a description for the selected item
+        int additionalPrice = calculateAdditionalPrice(side, drink);
+
         String itemDescription = mainItem.getMenuName() + " (Drink: " + drink + ", Side: " + side + ")";
 
-        // Check if this item is already in the cart
         if (cartItems.containsKey(itemDescription)) {
             OrderedItem orderedItem = cartItems.get(itemDescription);
-            orderedItem.increaseCount();
+            orderedItem.increaseCount();   
+            addItemToCart(orderedItem);    
         } else {
-            // Create a new OrderedItem instance and add it to the cartItems map
-            OrderedItem orderedItem = new OrderedItem(itemDescription, mainItemPrice, "Category", 1);
-            cartItems.put(itemDescription, orderedItem);
+            OrderedItem orderedItem = new OrderedItem(itemDescription, mainItemPrice + additionalPrice, Category.SET , 1);
+            addItemToCart(orderedItem);
         }
-
-        updateCartDisplay();
+        updateCartDisplay();   
     }
 
+    private int calculateAdditionalPrice(String side, String drink) {
+        boolean sideSelected = !side.equals("None");
+        boolean drinkSelected = !drink.equals("None");
+
+        if (sideSelected && drinkSelected) {
+            return 5;  
+        } else if (sideSelected || drinkSelected) {
+            return 3;  
+        } else {
+            return 0;  
+        }
+    }
 
     private String selectSide() {
-        String[] sides = {"French Fries", "Salad", "None"};
-        return (String) JOptionPane.showInputDialog(this,
+         
+        List<Menu> sideItems = menuManager.getMenuItemsByCategory(Category.SIDE);
+         
+        String[] sideOptions = new String[sideItems.size() + 1];
+
+        for (int i = 0; i < sideItems.size(); i++) {
+            sideOptions[i] = sideItems.get(i).getMenuName();
+        }
+        sideOptions[sideItems.size()] = "None";
+        if (sideOptions.length == 0) {
+            return "None";  
+        }
+        return (String) JOptionPane.showInputDialog(
+                this,
                 "Select a side:",
                 "Side Selection",
                 JOptionPane.QUESTION_MESSAGE,
                 null,
-                sides,
-                sides[0]);
+                sideOptions,
+                sideOptions[0]);
     }
-
     private String selectDrink() {
-        String[] drinks = {"Cola", "Water", "None"};
-        return (String) JOptionPane.showInputDialog(this,
+
+        List<Menu> drinkItems = menuManager.getMenuItemsByCategory(Category.DRINK);
+        String[] drinkOptions = new String[drinkItems.size() + 1];
+
+        for (int i = 0; i < drinkItems.size(); i++) {
+            drinkOptions[i] = drinkItems.get(i).getMenuName();
+        }
+        drinkOptions[drinkItems.size()] = "None";
+        return (String) JOptionPane.showInputDialog(
+                this,
                 "Select a drink:",
                 "Drink Selection",
                 JOptionPane.QUESTION_MESSAGE,
                 null,
-                drinks,
-                drinks[0]);
-    }
-
-    public void setCurrentLanguage(String currentLanguage) {
-        this.currentLanguage = currentLanguage;
-        updateMenuDisplay();
-        updateCartDisplay();
+                drinkOptions,
+                drinkOptions[0]);
     }
     private void proceedToPayment() {
         System.out.println("Hello");
