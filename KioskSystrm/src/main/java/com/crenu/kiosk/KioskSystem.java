@@ -1,7 +1,14 @@
 package com.crenu.kiosk;
 
+import com.crenu.kiosk.ui.InitialScreen;
+import com.crenu.kiosk.ui.UIManager;
+
+import javax.swing.*;
+
 public class KioskSystem {
+    public static UIManager uiManager;
     public static void main(String[] args) {
-        System.out.println("Hello world!");
+        uiManager = new UIManager();
+        InitialScreen.init();
     }
 }
