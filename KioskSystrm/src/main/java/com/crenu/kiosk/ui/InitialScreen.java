@@ -1,17 +1,14 @@
 package com.crenu.kiosk.ui;
 
-import com.crenu.kiosk.admin.MenuManager;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import static com.crenu.kiosk.KioskSystem.uiManager;
-import static com.crenu.kiosk.ui.PanelNameEntity.INITAL_PANELNAME;
-import static com.crenu.kiosk.ui.PanelNameEntity.LANGUAGE_PANELNAME;
+import static com.crenu.kiosk.ui.PanelNameEntity.*;
 
-public class InitialScreen{
+public class InitialScreen {
     public static void init() {
         JPanel panel = new JPanel();
         panel.setLayout(new FlowLayout());
@@ -20,12 +17,15 @@ public class InitialScreen{
         startButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-               LanguageSelectionScreen.init();
+                MenuDisplayScreen menuDisplayScreen = new MenuDisplayScreen();
+
+                uiManager.addPanel(MENU_PANELNAME, menuDisplayScreen, BorderLayout.CENTER);
                 uiManager.allPanelVisibleOff();
-                uiManager.panelSetVisble(LANGUAGE_PANELNAME, true);
+                uiManager.panelSetVisible(MENU_PANELNAME, true);
             }
         });
         panel.add(startButton);
+         
         uiManager.addPanel(INITAL_PANELNAME, panel, BorderLayout.CENTER);
         uiManager.setVisible(true);
     }
