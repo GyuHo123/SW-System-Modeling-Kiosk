@@ -92,6 +92,7 @@ public class MenuDisplayScreen extends JFrame {
             JButton increaseButton = new JButton("+");
             JButton decreaseButton = new JButton("-");
             JButton removeButton = new JButton("Remove");
+            JButton payment = new JButton("Pay");
 
             increaseButton.addActionListener(e -> {
                 addItemToCart(entry.getKey());

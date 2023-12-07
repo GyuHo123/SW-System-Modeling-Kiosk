@@ -74,4 +74,19 @@ public class MenuManager extends JFrame {
     public List<Menu> getMenuItems() {
         return new ArrayList<>(menuItems); // Return a copy to prevent external modification
     }
+
+    public void addMenuItem(Menu menu) {
+        this.menuItems.add(menu);
+        updateMenuDisplay();  // Update the display to reflect the new item
+    }
+
+    public void removeMenuItem(Menu menu) {
+        for (Menu menuItem : menuItems) {
+            if (menuItem.getMenuName().equals(menu.getMenuName())) {
+                menuItems.remove(menuItem);
+                updateMenuDisplay();  // Update the display to reflect the removal
+                break;  // Exit the loop after removing the item
+            }
+        }
+    }
 }

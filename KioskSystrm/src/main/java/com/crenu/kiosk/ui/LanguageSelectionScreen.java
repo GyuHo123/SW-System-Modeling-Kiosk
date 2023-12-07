@@ -1,6 +1,7 @@
 package com.crenu.kiosk.ui;
 
 import com.crenu.kiosk.admin.MenuManager;
+import com.crenu.kiosk.menu.Menu;
 
 import javax.swing.*;
 import java.awt.*;
@@ -37,7 +38,12 @@ public class LanguageSelectionScreen extends JFrame {
     }
 
     private void openMenuDisplayScreen(String language) {
-        MenuDisplayScreen menuDisplayScreen = new MenuDisplayScreen(language, new MenuManager());
+        MenuManager menuManager = new MenuManager();
+        menuManager.addMenuItem(new com.crenu.kiosk.menu.Menu("Bulgogi Burger", 8, "Main"));
+        menuManager.addMenuItem(new com.crenu.kiosk.menu.Menu("Cheese Burger", 7, "Main"));
+        menuManager.addMenuItem(new Menu("Veggie Burger", 6, "Main"));
+
+        MenuDisplayScreen menuDisplayScreen = new MenuDisplayScreen(language, menuManager);
         menuDisplayScreen.setVisible(true);
         setVisible(false); // Hide the language selection screen
     }
