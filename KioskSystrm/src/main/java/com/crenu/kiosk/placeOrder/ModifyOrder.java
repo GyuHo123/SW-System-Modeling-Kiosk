@@ -1,12 +1,12 @@
-package com.crenu.kiosk;
+package com.crenu.kiosk.placeOrder;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Order {
+public class ModifyOrder {
     private List<OrderedItem> items;
 
-    public Order() {
+    public ModifyOrder() {
         items = new ArrayList<>();
     }
 
@@ -26,7 +26,6 @@ public class Order {
         return total;
     }
 
-    // Method to display order contents (for shopping cart view)
     public void displayOrder() {
         for (OrderedItem item : items) {
             System.out.println("Item: " + item.getMenuName() + ", Quantity: " + item.getCount() + ", Price: " + item.getPrice());
