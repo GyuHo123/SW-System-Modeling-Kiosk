@@ -24,7 +24,21 @@ public class InitialScreen {
                 uiManager.panelSetVisible(MENU_PANELNAME, true);
             }
         });
+
+        JButton loginButton = new JButton("Admin page");
+        loginButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                LoginScreen loginScreen = new LoginScreen();
+
+                uiManager.addPanel(LOGIN_PANELNAME, loginScreen, BorderLayout.CENTER);
+                uiManager.allPanelVisibleOff();
+                uiManager.panelSetVisible(LOGIN_PANELNAME, true);
+            }
+        });
+
         panel.add(startButton);
+        panel.add(loginButton);
          
         uiManager.addPanel(INITAL_PANELNAME, panel, BorderLayout.CENTER);
         uiManager.setVisible(true);
