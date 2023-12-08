@@ -32,7 +32,7 @@ public class OrderedItem extends Menu {
     @Override
     public String toString() {
         return "OrderedItem{" +
-                "menuName='" + super.getMenuName() + '\'' +  // menuName is inherited from Menu
+                "menuName='" + super.getName() + '\'' +  // menuName is inherited from Menu
                 ", unitPrice=" + super.getPrice() +
                 ", category='" + super.getCategory() + '\'' +  // category is inherited from Menu
                 ", count=" + count +

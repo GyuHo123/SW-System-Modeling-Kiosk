@@ -5,7 +5,7 @@ import java.awt.*;
 import java.util.HashMap;
 
 public class UIManager extends JFrame {
-    public HashMap<String, JPanel> panels;
+    private HashMap<String, JPanel> panels;
 
     public UIManager(){
         setSize(860, 1080);
@@ -33,9 +33,16 @@ public class UIManager extends JFrame {
         panels.get(name).remove(component);
     }
 
-    public void addPanel(String name, JPanel panel, String borderLayout){
+    public void addPanel(String name, JPanel panel){
         panels.put(name, panel);
-        add(panel, borderLayout);
+        add(panel);
+        setVisible(true);
+    }
+
+    public void removePanel(String name, JPanel panel){
+        panels.remove(name);
+        remove(panel);
+        setVisible(true);
     }
 
 }

@@ -11,36 +11,36 @@ import static com.crenu.kiosk.ui.PanelNameEntity.*;
 public class InitialScreen {
     public static void init() {
         JPanel panel = new JPanel();
-        panel.setLayout(new FlowLayout());
+        panel.setLayout(new BorderLayout());
 
-        JButton startButton = new JButton("Start");
+        JButton startButton = new JButton("START");
+        startButton.setPreferredSize(new Dimension(860, 900));
         startButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                MenuDisplayScreen menuDisplayScreen = new MenuDisplayScreen();
-
-                uiManager.addPanel(MENU_PANELNAME, menuDisplayScreen, BorderLayout.CENTER);
+                new MenuDisplayScreen();
                 uiManager.allPanelVisibleOff();
                 uiManager.panelSetVisible(MENU_PANELNAME, true);
             }
         });
 
         JButton loginButton = new JButton("Admin page");
+        loginButton.setPreferredSize(new Dimension(860, 100));
         loginButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 LoginScreen loginScreen = new LoginScreen();
 
-                uiManager.addPanel(LOGIN_PANELNAME, loginScreen, BorderLayout.CENTER);
+                uiManager.addPanel(LOGIN_PANELNAME, loginScreen);
                 uiManager.allPanelVisibleOff();
                 uiManager.panelSetVisible(LOGIN_PANELNAME, true);
             }
         });
 
-        panel.add(startButton);
-        panel.add(loginButton);
+        panel.add(startButton, BorderLayout.NORTH);
+        panel.add(loginButton, BorderLayout.SOUTH);
          
-        uiManager.addPanel(INITAL_PANELNAME, panel, BorderLayout.CENTER);
+        uiManager.addPanel(INITAL_PANELNAME, panel);
         uiManager.setVisible(true);
     }
 }
