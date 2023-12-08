@@ -32,8 +32,6 @@ public class CartScreen {
         itemListPanel.setPreferredSize(new Dimension(860, 800));
         itemListPanel.setBackground(Color.YELLOW);
 
-
-
         for(CartItem item : cart.getCartItems()){
             addItemPanel(item);
         }
