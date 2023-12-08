@@ -7,4 +7,5 @@ public class PanelNameEntity {
     public static String CART_PNAELNAME = "CART";
 
     public static String MANAGER_PANELNAME = "Manager";
+    public static String ORDER_MANAGE_PANELNAME = "OrderManage";
 }

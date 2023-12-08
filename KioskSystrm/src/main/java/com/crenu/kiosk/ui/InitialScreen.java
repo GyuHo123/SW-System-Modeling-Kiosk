@@ -14,7 +14,7 @@ public class InitialScreen {
         panel.setLayout(new BorderLayout());
 
         JButton startButton = new JButton("START");
-        startButton.setPreferredSize(new Dimension(860, 900));
+        startButton.setPreferredSize(new Dimension(860, 600));
         startButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
