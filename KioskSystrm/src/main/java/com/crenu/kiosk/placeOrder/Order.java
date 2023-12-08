@@ -17,8 +17,11 @@ public class Order{
     public void setOrderNumber(int orderNum){
         orderNumber = orderNum;
     }
+    public int getOrderNumber(){
+        return orderNumber;
+    }
     public String toString(){
-        String str = "Order Number " + orderNumber;
+        String str = "Order Number " + orderNumber + "\n";
         int totalPrice = 0;
         for(CartItem item : orderMenus){
             int price = item.getCount()*item.getPrice();

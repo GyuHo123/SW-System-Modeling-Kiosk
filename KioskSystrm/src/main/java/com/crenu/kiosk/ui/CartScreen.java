@@ -1,5 +1,6 @@
 package com.crenu.kiosk.ui;
 
+import com.crenu.kiosk.KioskSystem;
 import com.crenu.kiosk.cart.CartItem;
 import com.crenu.kiosk.placeOrder.Order;
 
@@ -7,6 +8,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.PrimitiveIterator;
 
 import static com.crenu.kiosk.KioskSystem.*;
 import static com.crenu.kiosk.ui.PanelNameEntity.*;
@@ -80,6 +82,28 @@ public class CartScreen {
         itemListPanel.add(itemPanel);
     }
 
+    private void showResultDialog(int orderNum){
+        JDialog jd = new JDialog(uiManager);
+        jd.setLayout(new FlowLayout());
+        jd.setBounds(430, 540, 200, 120);
+        JLabel jLabel = new JLabel("Complete Order");
+        JLabel jLabel2 = new JLabel("OrderNumber : " +orderNum);
+        JButton jButton = new JButton("OK");
+        jButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                jd.setVisible(false);
+                KioskSystem.init();
+            }
+        });
+
+        jd.add(jLabel);
+        jd.add(jLabel2);
+        jd.add(jButton);
+        jd.setVisible(true);
+    }
+
+
     private void initPayment(){
         JPanel paymentPanel = new JPanel();
         paymentPanel.setLayout(new GridLayout());
@@ -98,7 +122,8 @@ public class CartScreen {
         creditButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                orderSystem.addNowOrder();
+                int orderNum = orderSystem.addNowOrder();
+                showResultDialog(orderNum);
             }
         });
         paymentPanel.add(creditButton, BorderLayout.NORTH);

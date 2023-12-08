@@ -12,13 +12,14 @@ public class KioskSystem {
     public static Cart cart;
     public static OrderSystem orderSystem;
     public static void main(String[] args) {
+        uiManager = new UIManager();
+        orderSystem = new OrderSystem();
+        menuManager = new MenuManager();
         init();
     }
     public static void init(){
-        uiManager = new UIManager();
-        menuManager = new MenuManager();
+        uiManager.remove();
         cart = new Cart();
-        orderSystem = new OrderSystem();
         InitialScreen.init();
     }
 }

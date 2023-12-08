@@ -1,10 +1,12 @@
 package com.crenu.kiosk.placeOrder;
 
-import com.sun.org.apache.xpath.internal.operations.Or;
+
+import com.crenu.kiosk.ui.OrderSystemScreen;
 
 import java.util.HashMap;
 
 import static com.crenu.kiosk.KioskSystem.cart;
+import static com.crenu.kiosk.KioskSystem.orderSystem;
 
 public class OrderSystem {
 
@@ -21,6 +23,7 @@ public class OrderSystem {
         orderNum++;
         order.setOrderNumber(orderNum);
         orderList.put(orderNum, order);
+        new OrderSystemScreen(order);
         return orderNum;
     }
 

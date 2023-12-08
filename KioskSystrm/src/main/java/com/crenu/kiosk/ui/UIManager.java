@@ -25,6 +25,7 @@ public class UIManager extends JFrame {
         }
     }
 
+
     public void addComponent(String name, Component component){
         panels.get(name).add(component);
     }
@@ -44,5 +45,15 @@ public class UIManager extends JFrame {
         remove(panel);
         setVisible(true);
     }
+
+    public void remove(){
+        for(JPanel panel : panels.values()){
+            remove(panel);
+        }
+        panels.clear();
+        validate();
+        repaint();
+    }
+
 
 }

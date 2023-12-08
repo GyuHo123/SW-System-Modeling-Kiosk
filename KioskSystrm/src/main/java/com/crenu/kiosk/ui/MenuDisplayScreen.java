@@ -6,7 +6,6 @@ import com.crenu.kiosk.menu.Category;
 import com.crenu.kiosk.placeOrder.OrderedItem;
 import com.crenu.kiosk.admin.MenuManager;
 import com.crenu.kiosk.menu.Menu;
-import javafx.scene.text.Text;
 
 import javax.swing.*;
 import javax.swing.text.JTextComponent;

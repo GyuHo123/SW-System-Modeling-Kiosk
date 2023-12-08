@@ -42,5 +42,7 @@ public class InitialScreen {
          
         uiManager.addPanel(INITAL_PANELNAME, panel);
         uiManager.setVisible(true);
+        uiManager.validate();
+        uiManager.repaint();
     }
 }
