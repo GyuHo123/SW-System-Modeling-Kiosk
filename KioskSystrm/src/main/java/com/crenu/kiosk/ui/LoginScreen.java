@@ -1,12 +1,8 @@
 package com.crenu.kiosk.ui;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
-import static com.crenu.kiosk.KioskSystem.uiManager;
-import static com.crenu.kiosk.ui.PanelNameEntity.LOGIN_PANELNAME;
 
 public class LoginScreen extends JPanel {
 

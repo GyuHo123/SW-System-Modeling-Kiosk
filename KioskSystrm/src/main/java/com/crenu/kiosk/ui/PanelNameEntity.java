@@ -5,4 +5,6 @@ public class PanelNameEntity {
     public static String MENU_PANELNAME = "Menu Display";
     public static String LOGIN_PANELNAME = "Login";
     public static String CART_PNAELNAME = "CART";
+
+    public static String MENU_MANAGE_PANELNAME = "Menu Manager";
 }
