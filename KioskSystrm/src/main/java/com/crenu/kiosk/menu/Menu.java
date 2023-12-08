@@ -1,29 +1,15 @@
 package com.crenu.kiosk.menu;
 
-public class Menu {
-    private String menuName;
-    private Integer price;
-    private Category category;
+import com.crenu.kiosk.admin.Item;
+import com.crenu.kiosk.cart.CartItem;
 
-    public Menu(String menuName, Integer price, Category category) {
-        this.menuName = menuName;
-        this.price = price;
-        this.category = category;
-    }
-    public String getMenuName() {
-        return menuName;
+public class Menu extends Item {
+
+    public Menu(String name, Integer price, Category category) {
+        super(name, price, category);
     }
 
-    public Integer getPrice() {
-        return price;
-    }
-
-    public Category getCategory() {
-        return category;
-    }
-
-    @Override
-    public String toString() {
-        return menuName + " - $" + price;
+    public CartItem toCartItem(){
+        return new CartItem(getName(), getPrice(), getCategory());
     }
 }

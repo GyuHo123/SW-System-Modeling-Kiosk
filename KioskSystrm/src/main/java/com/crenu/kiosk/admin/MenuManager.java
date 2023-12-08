@@ -32,7 +32,7 @@ public class MenuManager extends JFrame {
 
     public void removeMenuItem(Menu menu) {
         for (Menu menuItem : menuItems) {
-            if (menuItem.getMenuName().equals(menu.getMenuName())) {
+            if (menuItem.getName().equals(menu.getName())) {
                 menuItems.remove(menuItem);
                 break;  // Exit the loop after removing the item
             }
