@@ -1,16 +1,16 @@
 package com.crenu.kiosk.ui;
 
 import com.crenu.kiosk.cart.CartItem;
+import com.crenu.kiosk.placeOrder.Order;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import static com.crenu.kiosk.KioskSystem.cart;
-import static com.crenu.kiosk.KioskSystem.uiManager;
-import static com.crenu.kiosk.ui.PanelNameEntity.CART_PNAELNAME;
-import static com.crenu.kiosk.ui.PanelNameEntity.MENU_PANELNAME;
+import static com.crenu.kiosk.KioskSystem.*;
+import static com.crenu.kiosk.ui.PanelNameEntity.*;
+import static com.crenu.kiosk.ui.PanelNameEntity.LOGIN_PANELNAME;
 
 public class CartScreen {
     private JPanel main;
@@ -29,6 +29,8 @@ public class CartScreen {
         itemListPanel.setLayout(new FlowLayout());
         itemListPanel.setPreferredSize(new Dimension(860, 800));
         itemListPanel.setBackground(Color.YELLOW);
+
+
 
         for(CartItem item : cart.getCartItems()){
             addItemPanel(item);
@@ -83,10 +85,23 @@ public class CartScreen {
         paymentPanel.setLayout(new GridLayout());
         paymentPanel.setPreferredSize(new Dimension(860, 200));
         this.main.add(paymentPanel, BorderLayout.SOUTH);
-        JButton cashButton = new JButton("CASH");
-        paymentPanel.add(cashButton, BorderLayout.WEST);
+        JButton back = new JButton("BACK");
+        paymentPanel.add(back, BorderLayout.SOUTH);
+        back.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                uiManager.allPanelVisibleOff();
+                uiManager.panelSetVisible(MENU_PANELNAME, true);
+            }
+        });
         JButton creditButton = new JButton("CARD");
-        paymentPanel.add(creditButton, BorderLayout.EAST);
+        creditButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                orderSystem.addNowOrder();
+            }
+        });
+        paymentPanel.add(creditButton, BorderLayout.NORTH);
     }
 
 }

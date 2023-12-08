@@ -172,6 +172,9 @@ public class MenuDisplayScreen {
         addItemButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                if(selectItem == null){
+                    return;
+                }
                 cart.addCartItem(selectItem);
                 clearSelectItem();
             }
