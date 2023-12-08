@@ -4,9 +4,9 @@ package com.crenu.kiosk.placeOrder;
 import com.crenu.kiosk.ui.OrderSystemScreen;
 
 import java.util.HashMap;
+import java.util.Set;
 
 import static com.crenu.kiosk.KioskSystem.cart;
-import static com.crenu.kiosk.KioskSystem.orderSystem;
 
 public class OrderSystem {
 
@@ -30,6 +30,11 @@ public class OrderSystem {
     public void removeOrder(int orderNum){
         orderList.remove(orderNum);
     }
+
+    public Set<Integer> getOrderNumbers() {
+        return orderList.keySet();
+    }
+
 
     public Order getOrder(int orderNum){
         return  orderList.get(orderNum);
