@@ -14,11 +14,11 @@ public class KioskSystem {
     public static void main(String[] args) {
         uiManager = new UIManager();
         orderSystem = new OrderSystem();
-        menuManager = new MenuManager();
         init();
     }
     public static void init(){
         uiManager.remove();
+        menuManager = new MenuManager();
         cart = new Cart();
         InitialScreen.init();
     }

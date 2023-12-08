@@ -1,20 +1,13 @@
 package com.crenu.kiosk.ui;
 
-import com.crenu.kiosk.cart.Cart;
 import com.crenu.kiosk.cart.CartItem;
 import com.crenu.kiosk.menu.Category;
-import com.crenu.kiosk.placeOrder.OrderedItem;
-import com.crenu.kiosk.admin.MenuManager;
 import com.crenu.kiosk.menu.Menu;
 
 import javax.swing.*;
-import javax.swing.text.JTextComponent;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 import static com.crenu.kiosk.KioskSystem.*;
 import static com.crenu.kiosk.ui.PanelNameEntity.CART_PNAELNAME;
