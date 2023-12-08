@@ -1,5 +1,6 @@
 package com.crenu.kiosk.ui;
 
+import com.crenu.kiosk.cart.Cart;
 import com.crenu.kiosk.cart.CartItem;
 import com.crenu.kiosk.menu.Category;
 import com.crenu.kiosk.placeOrder.OrderedItem;
@@ -17,6 +18,7 @@ import java.util.List;
 import java.util.Map;
 
 import static com.crenu.kiosk.KioskSystem.*;
+import static com.crenu.kiosk.ui.PanelNameEntity.CART_PNAELNAME;
 import static com.crenu.kiosk.ui.PanelNameEntity.MENU_PANELNAME;
 
 public class MenuDisplayScreen {
@@ -176,6 +178,14 @@ public class MenuDisplayScreen {
         });
         funPanel.add(addItemButton);
         JButton payButton = new JButton("PAY");
+        payButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+               new CartScreen();
+                uiManager.allPanelVisibleOff();
+                uiManager.panelSetVisible(CART_PNAELNAME, true);
+            }
+        });
         funPanel.add(payButton);
         infoPanel.add(funPanel, BorderLayout.SOUTH);
     }
