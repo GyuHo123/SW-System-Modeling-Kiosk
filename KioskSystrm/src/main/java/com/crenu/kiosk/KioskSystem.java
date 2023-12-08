@@ -3,7 +3,7 @@ package com.crenu.kiosk;
 import com.crenu.kiosk.admin.MenuManager;
 import com.crenu.kiosk.cart.Cart;
 import com.crenu.kiosk.placeOrder.OrderSystem;
-import com.crenu.kiosk.ui.InitialScreen;
+import com.crenu.kiosk.ui.MenuManageScreen2;
 import com.crenu.kiosk.ui.UIManager;
 
 public class KioskSystem {

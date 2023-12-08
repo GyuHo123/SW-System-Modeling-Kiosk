@@ -8,4 +8,6 @@ public class PanelNameEntity {
 
 
     public static String MANAGER_PANELNAME = "Manager";
+
+    public static String MENU_MANAGE_PNAELNAME = "Menu Manage";
 }

@@ -5,18 +5,18 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import com.crenu.kiosk.cart.CartItem;
 import com.crenu.kiosk.menu.Menu;
 import static com.crenu.kiosk.KioskSystem.*;
+import static com.crenu.kiosk.ui.PanelNameEntity.*;
 
-public class MenuManageScreen {
+public class MenuManageScreen2 {
     JPanel main;
     JPanel menuListPanel;
 
-    public MenuManageScreen(){
+    public MenuManageScreen2(){
         this.main = new JPanel();
         this.main.setLayout(new BorderLayout());
-        uiManager.addPanel(MANAGER_PNAELNAME, this.main);
+        uiManager.addPanel(MENU_MANAGE_PNAELNAME, this.main);
 
         initMenuList();
     }
@@ -28,6 +28,7 @@ public class MenuManageScreen {
         menuListPanel.setBackground(Color.GREEN);
         for(Menu menu : menuManager.getMenuItems()){
             addMenuPanel(menu);
+
         }
         this.main.add(menuListPanel, BorderLayout.NORTH);
         menuListPanel.revalidate();
@@ -39,7 +40,7 @@ public class MenuManageScreen {
         menuPanel.setLayout(new BorderLayout());
         menuPanel.setPreferredSize(new Dimension(860, 100));
 
-        JButton deleteButton = new JButton("+");
+        JButton deleteButton = new JButton("delete");
         JLabel nameText = new JLabel();
         nameText.setText(menu.getName());
         JLabel countText = new JLabel();
@@ -47,7 +48,7 @@ public class MenuManageScreen {
             @Override
             public void actionPerformed(ActionEvent e) {
 //                countText.setText("Count : " + menu.getCount());
-                //삭제를 한다
+                //delete
             }
         });
         menuPanel.add(deleteButton, BorderLayout.WEST);
