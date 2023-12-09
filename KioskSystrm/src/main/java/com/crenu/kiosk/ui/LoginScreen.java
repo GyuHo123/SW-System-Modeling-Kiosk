@@ -1,13 +1,14 @@
 package com.crenu.kiosk.ui;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 
 import static com.crenu.kiosk.KioskSystem.uiManager;
 import static com.crenu.kiosk.ui.PanelNameEntity.LOGIN_PANELNAME;
 import static com.crenu.kiosk.ui.PanelNameEntity.MANAGER_PANELNAME;
+
 
 public class LoginScreen extends JPanel {
 
@@ -33,10 +34,7 @@ public class LoginScreen extends JPanel {
     }
 
     public void turnToManagerScrren() {
-        ManagerScreen managerScreen = new ManagerScreen();
-        uiManager.addPanel(MANAGER_PANELNAME, managerScreen);
-        uiManager.allPanelVisibleOff();
-        uiManager.panelSetVisible(MANAGER_PANELNAME, true);
+        new ManagerScreen();
     }
 
     private boolean checkCredentials(String userID, String password) {
