@@ -4,8 +4,13 @@ import com.crenu.kiosk.placeOrder.Order;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import static com.crenu.kiosk.KioskSystem.orderSystem;
+import static com.crenu.kiosk.KioskSystem.uiManager;
+import static com.crenu.kiosk.ui.PanelNameEntity.LOGIN_PANELNAME;
+import static com.crenu.kiosk.ui.PanelNameEntity.MANAGER_PANELNAME;
 
 public class OrderManageScreen extends JPanel {
     private JPanel orderListPanel;
@@ -13,6 +18,18 @@ public class OrderManageScreen extends JPanel {
     public OrderManageScreen() {
         setLayout(new BorderLayout());
         initOrderList();
+
+        JButton backButton = new JButton("back");
+        backButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ManagerScreen managerScreen = new ManagerScreen();
+                uiManager.addPanel(MANAGER_PANELNAME, managerScreen);
+                uiManager.allPanelVisibleOff();
+                uiManager.panelSetVisible(MANAGER_PANELNAME, true);
+            }
+        });
+        add(backButton,BorderLayout.SOUTH);
     }
 
     private void initOrderList() {
