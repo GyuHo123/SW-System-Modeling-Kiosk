@@ -81,17 +81,19 @@ public class CartScreen {
     }
 
     private void showResultDialog(int orderNum){
-        JDialog jd = new JDialog(uiManager);
+        // Create a modal dialog that blocks input to other windows
+        JDialog jd = new JDialog(uiManager, "Order Result", Dialog.ModalityType.APPLICATION_MODAL);
         jd.setLayout(new FlowLayout());
         jd.setBounds(430, 540, 200, 120);
+
         JLabel jLabel = new JLabel("Complete Order");
-        JLabel jLabel2 = new JLabel("OrderNumber : " +orderNum);
+        JLabel jLabel2 = new JLabel("OrderNumber : " + orderNum);
         JButton jButton = new JButton("OK");
         jButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                jd.setVisible(false);
-                KioskSystem.init();
+                jd.dispose(); // Close the dialog
+                KioskSystem.init(); // Reset the system or perform necessary actions after closing the dialog
             }
         });
 
@@ -100,7 +102,6 @@ public class CartScreen {
         jd.add(jButton);
         jd.setVisible(true);
     }
-
 
     private void initPayment(){
         JPanel paymentPanel = new JPanel();
