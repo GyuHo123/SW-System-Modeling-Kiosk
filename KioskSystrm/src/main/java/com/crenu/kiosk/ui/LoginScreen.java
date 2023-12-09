@@ -34,10 +34,7 @@ public class LoginScreen extends JPanel {
     }
 
     public void turnToManagerScrren() {
-        ManagerScreen managerScreen = new ManagerScreen();
-        uiManager.addPanel(MANAGER_PANELNAME, managerScreen);
-        uiManager.allPanelVisibleOff();
-        uiManager.panelSetVisible(MANAGER_PANELNAME, true);
+        new ManagerScreen();
     }
 
     private boolean checkCredentials(String userID, String password) {
