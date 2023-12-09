@@ -6,7 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import static com.crenu.kiosk.KioskSystem.uiManager;
-import static com.crenu.kiosk.ui.PanelNameEntity.ORDER_MANAGE_PANELNAME;
+import static com.crenu.kiosk.ui.PanelNameEntity.*;
 
 public class ManagerScreen extends JPanel {
     public ManagerScreen() {
@@ -17,6 +17,13 @@ public class ManagerScreen extends JPanel {
         add(menuManageBtn);
         add(orderManageBtn);
 
+        menuManageBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new MenuManageScreen();
+            }
+        });
+
         orderManageBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -26,6 +33,15 @@ public class ManagerScreen extends JPanel {
                 uiManager.panelSetVisible(ORDER_MANAGE_PANELNAME, true);
             }
         });
+        JButton backButton = new JButton("back");
+        backButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                uiManager.allPanelVisibleOff();
+                InitialScreen.init();
+            }
+        });
+        add(backButton, BorderLayout.SOUTH);
     }
 
 }

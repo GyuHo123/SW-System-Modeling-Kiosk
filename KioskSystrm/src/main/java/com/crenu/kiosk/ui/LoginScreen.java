@@ -5,9 +5,11 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+
 import static com.crenu.kiosk.KioskSystem.uiManager;
 import static com.crenu.kiosk.ui.PanelNameEntity.LOGIN_PANELNAME;
 import static com.crenu.kiosk.ui.PanelNameEntity.MANAGER_PANELNAME;
+
 
 public class LoginScreen extends JPanel {
 
@@ -30,6 +32,17 @@ public class LoginScreen extends JPanel {
         add(userIDField);
         add(passwordField);
         add(btnLogin);
+
+
+        JButton backButton = new JButton("back");
+        backButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                uiManager.allPanelVisibleOff();
+                InitialScreen.init();
+            }
+        });
+        add(backButton, BorderLayout.SOUTH);
     }
 
     public void turnToManagerScrren() {
