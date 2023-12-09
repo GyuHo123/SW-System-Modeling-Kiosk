@@ -33,6 +33,15 @@ public class ManagerScreen extends JPanel {
                 uiManager.panelSetVisible(ORDER_MANAGE_PANELNAME, true);
             }
         });
+        JButton backButton = new JButton("back");
+        backButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                uiManager.allPanelVisibleOff();
+                InitialScreen.init();
+            }
+        });
+        add(backButton, BorderLayout.SOUTH);
     }
 
 }

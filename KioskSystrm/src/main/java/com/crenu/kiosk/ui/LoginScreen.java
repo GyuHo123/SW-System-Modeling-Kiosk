@@ -1,6 +1,7 @@
 package com.crenu.kiosk.ui;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -31,10 +32,24 @@ public class LoginScreen extends JPanel {
         add(userIDField);
         add(passwordField);
         add(btnLogin);
+
+
+        JButton backButton = new JButton("back");
+        backButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                uiManager.allPanelVisibleOff();
+                InitialScreen.init();
+            }
+        });
+        add(backButton, BorderLayout.SOUTH);
     }
 
     public void turnToManagerScrren() {
-        new ManagerScreen();
+        ManagerScreen managerScreen = new ManagerScreen();
+        uiManager.addPanel(MANAGER_PANELNAME, managerScreen);
+        uiManager.allPanelVisibleOff();
+        uiManager.panelSetVisible(MANAGER_PANELNAME, true);
     }
 
     private boolean checkCredentials(String userID, String password) {

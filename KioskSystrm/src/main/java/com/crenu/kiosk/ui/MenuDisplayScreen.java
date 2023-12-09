@@ -13,7 +13,7 @@ import static com.crenu.kiosk.KioskSystem.*;
 import static com.crenu.kiosk.ui.PanelNameEntity.CART_PNAELNAME;
 import static com.crenu.kiosk.ui.PanelNameEntity.MENU_PANELNAME;
 
-public class MenuDisplayScreen {
+public class MenuDisplayScreen{
     private JPanel main;
     private JPanel menuPanel;
     private JPanel infoPanel;
@@ -42,6 +42,16 @@ public class MenuDisplayScreen {
         initMenuPanel();
         initInfoPanel();
         initFunctionPanel();
+
+//        JButton backButton = new JButton("back");
+//        backButton.addActionListener(new ActionListener() {
+//            @Override
+//            public void actionPerformed(ActionEvent e) {
+//                uiManager.allPanelVisibleOff();
+//                InitialScreen.init();
+//            }
+//        });
+//        this.main.add(backButton, BorderLayout.SOUTH);
     }
 
     private void initSelectPanel(){

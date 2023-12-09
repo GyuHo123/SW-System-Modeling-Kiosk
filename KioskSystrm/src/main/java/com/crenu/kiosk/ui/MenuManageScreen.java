@@ -31,8 +31,6 @@ public class MenuManageScreen extends JPanel{
                 uiManager.addPanel(MANAGER_PANELNAME, managerScreen);
                 uiManager.allPanelVisibleOff();
                 uiManager.panelSetVisible(MANAGER_PANELNAME, true);
-                menuListPanel.revalidate();
-                menuListPanel.repaint();
             }
         });
         add(backButton,BorderLayout.SOUTH);
