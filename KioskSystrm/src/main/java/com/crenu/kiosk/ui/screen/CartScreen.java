@@ -9,7 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import static com.crenu.kiosk.KioskSystem.*;
-import static com.crenu.kiosk.entity.PanelNameEntity.*;
+import static com.crenu.kiosk.entity.PanelName.*;
 
 public class CartScreen extends KioskPanel {
     private JPanel itemListPanel;

@@ -10,7 +10,7 @@ import java.awt.event.ActionListener;
 
 import static com.crenu.kiosk.KioskSystem.orderSystem;
 import static com.crenu.kiosk.KioskSystem.panelManager;
-import static com.crenu.kiosk.entity.PanelNameEntity.MANAGER_PANELNAME;
+import static com.crenu.kiosk.entity.PanelName.MANAGER_PANELNAME;
 
 public class OrderManageScreen extends KioskPanel {
     private JPanel orderListPanel;

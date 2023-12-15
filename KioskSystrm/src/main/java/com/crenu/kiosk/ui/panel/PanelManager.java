@@ -6,7 +6,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.HashMap;
 
-import static com.crenu.kiosk.entity.PanelNameEntity.*;
+import static com.crenu.kiosk.entity.PanelName.*;
 
 public class PanelManager extends JFrame {
     private HashMap<String, KioskPanel> panels;

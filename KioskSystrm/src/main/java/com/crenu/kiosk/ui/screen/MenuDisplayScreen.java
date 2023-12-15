@@ -1,7 +1,7 @@
 package com.crenu.kiosk.ui.screen;
 
 import com.crenu.kiosk.cart.CartItem;
-import com.crenu.kiosk.menu.Category;
+import com.crenu.kiosk.entity.Category;
 import com.crenu.kiosk.menu.Menu;
 import com.crenu.kiosk.ui.panel.KioskPanel;
 
@@ -11,7 +11,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import static com.crenu.kiosk.KioskSystem.*;
-import static com.crenu.kiosk.entity.PanelNameEntity.CART_PNAELNAME;
+import static com.crenu.kiosk.entity.PanelName.CART_PNAELNAME;
 
 public class MenuDisplayScreen extends KioskPanel {
     private JPanel menuPanel;

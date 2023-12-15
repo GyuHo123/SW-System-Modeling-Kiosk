@@ -2,6 +2,7 @@ package com.crenu.kiosk.menu;
 
 import com.crenu.kiosk.admin.Item;
 import com.crenu.kiosk.cart.CartItem;
+import com.crenu.kiosk.entity.Category;
 
 public class Menu extends Item {
 

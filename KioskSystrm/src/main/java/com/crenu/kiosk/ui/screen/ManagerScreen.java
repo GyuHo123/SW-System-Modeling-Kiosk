@@ -8,7 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import static com.crenu.kiosk.KioskSystem.panelManager;
-import static com.crenu.kiosk.entity.PanelNameEntity.*;
+import static com.crenu.kiosk.entity.PanelName.*;
 
 public class ManagerScreen extends KioskPanel {
     @Override

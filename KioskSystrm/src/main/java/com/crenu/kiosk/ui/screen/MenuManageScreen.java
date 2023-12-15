@@ -5,12 +5,12 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import com.crenu.kiosk.menu.Category;
+import com.crenu.kiosk.entity.Category;
 import com.crenu.kiosk.menu.Menu;
 import com.crenu.kiosk.ui.panel.KioskPanel;
 
 import static com.crenu.kiosk.KioskSystem.*;
-import static com.crenu.kiosk.entity.PanelNameEntity.*;
+import static com.crenu.kiosk.entity.PanelName.*;
 
 public class MenuManageScreen extends KioskPanel {
     JPanel menuListPanel;
