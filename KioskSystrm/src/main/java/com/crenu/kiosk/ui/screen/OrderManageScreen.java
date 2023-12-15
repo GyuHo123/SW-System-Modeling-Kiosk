@@ -1,5 +1,6 @@
 package com.crenu.kiosk.ui.screen;
 
+import com.crenu.kiosk.entity.OrderState;
 import com.crenu.kiosk.placeOrder.Order;
 import com.crenu.kiosk.ui.panel.KioskPanel;
 
@@ -56,31 +57,47 @@ public class OrderManageScreen extends KioskPanel {
 
     private void addOrderPanel(Order order) {
         JPanel orderPanel = new JPanel();
-        orderPanel.setLayout(new BorderLayout());
+        orderPanel.setLayout(new FlowLayout());
         orderPanel.setPreferredSize(new Dimension(860, 100));
         JLabel orderDetails = new JLabel("<html>" + order.toString().replaceAll("\n", "<br>") + "</html>");
+        int orderNum = order.getOrderNumber();
+
+        JButton checkButton = new JButton("Check");
+        checkButton.addActionListener(e -> {
+            orderSystem.updateOrderState(orderNum, OrderState.COOKING);
+        });
+
+        JButton cancleButton = new JButton("Cancle");
+        cancleButton.addActionListener(e -> {
+            orderSystem.updateOrderState(orderNum, OrderState.CANCLE);
+            orderSystem.removeOrder(orderNum);
+            orderPanel.setVisible(false);
+            orderListPanel.revalidate();
+            orderListPanel.repaint();
+        });
 
         JButton completeButton = new JButton("Complete");
         completeButton.addActionListener(e -> {
-            orderSystem.orderReceipts(order.getOrderNumber()).compeleteState();
-            completeButton.setVisible(false);
-            orderPanel.revalidate();
-            orderPanel.repaint();
+            orderSystem.updateOrderState(orderNum, OrderState.COMPLETE);
         });
 
-        JButton recallCompeleteButton = new JButton("Recall Complete");
+        JButton recallCompeleteButton = new JButton("Recall Compelete");
         recallCompeleteButton.addActionListener(e -> {
-            orderSystem.removeOrder(order.getOrderNumber());
+            orderSystem.removeOrder(orderNum);
+            orderSystem.removeOrderReceipts(orderNum);
             orderPanel.setVisible(false);
+            orderListPanel.revalidate();
+            orderListPanel.repaint();
         });
 
-        orderPanel.add(orderDetails, BorderLayout.CENTER);
-        orderPanel.add(completeButton, BorderLayout.EAST);
-        orderPanel.add(recallCompeleteButton, BorderLayout.WEST);
+        orderPanel.add(orderDetails);
+        orderPanel.add(checkButton);
+        orderPanel.add(cancleButton);
+        orderPanel.add(completeButton);
+        orderPanel.add(recallCompeleteButton);
         orderListPanel.add(orderPanel);
         orderListPanel.revalidate();
         orderListPanel.repaint();
-
     }
 
 
