@@ -9,10 +9,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Locale;
 
 import static com.crenu.kiosk.KioskSystem.*;
-import static com.crenu.kiosk.ui.entity.PanelNameEntity.CART_PNAELNAME;
+import static com.crenu.kiosk.entity.PanelNameEntity.CART_PNAELNAME;
 
 public class MenuDisplayScreen extends KioskPanel {
     private JPanel menuPanel;

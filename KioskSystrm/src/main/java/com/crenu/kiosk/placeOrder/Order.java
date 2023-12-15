@@ -11,7 +11,7 @@ public class Order{
     private ArrayList<CartItem> orderMenus;
     private int orderNumber = 0;
     public Order(ArrayList<CartItem> orderMenus){
-        this.orderMenus = orderMenus;
+        this.orderMenus = (ArrayList<CartItem>)orderMenus.clone();
     }
 
     public void setOrderNumber(int orderNum){

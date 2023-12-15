@@ -1,6 +1,5 @@
 package com.crenu.kiosk.ui.screen;
 
-import com.crenu.kiosk.KioskSystem;
 import com.crenu.kiosk.cart.CartItem;
 import com.crenu.kiosk.ui.panel.KioskPanel;
 
@@ -10,7 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import static com.crenu.kiosk.KioskSystem.*;
-import static com.crenu.kiosk.ui.entity.PanelNameEntity.*;
+import static com.crenu.kiosk.entity.PanelNameEntity.*;
 
 public class CartScreen extends KioskPanel {
     private JPanel itemListPanel;

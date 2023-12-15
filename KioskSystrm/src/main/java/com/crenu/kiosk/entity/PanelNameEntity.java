@@ -1,4 +1,4 @@
-package com.crenu.kiosk.ui.entity;
+package com.crenu.kiosk.entity;
 
 public enum PanelNameEntity {
     INITAL_PANELNAME("InitialScreen"),

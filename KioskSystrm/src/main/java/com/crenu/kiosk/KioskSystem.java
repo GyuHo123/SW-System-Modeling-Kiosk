@@ -4,9 +4,6 @@ import com.crenu.kiosk.admin.MenuManager;
 import com.crenu.kiosk.cart.Cart;
 import com.crenu.kiosk.placeOrder.OrderSystem;
 import com.crenu.kiosk.ui.panel.PanelManager;
-import com.crenu.kiosk.ui.screen.InitialScreen;
-
-import static com.crenu.kiosk.ui.entity.PanelNameEntity.INITAL_PANELNAME;
 
 public class KioskSystem {
     public static PanelManager panelManager;

@@ -10,7 +10,7 @@ import com.crenu.kiosk.menu.Menu;
 import com.crenu.kiosk.ui.panel.KioskPanel;
 
 import static com.crenu.kiosk.KioskSystem.*;
-import static com.crenu.kiosk.ui.entity.PanelNameEntity.*;
+import static com.crenu.kiosk.entity.PanelNameEntity.*;
 
 public class MenuManageScreen extends KioskPanel {
     JPanel menuListPanel;

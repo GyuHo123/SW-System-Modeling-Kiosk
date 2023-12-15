@@ -26,7 +26,7 @@ public class OrderSystem {
         orderNum++;
         order.setOrderNumber(orderNum);
         orderList.put(orderNum, order);
-        orderReceipts.put(orderNum, new OrderReceiptScreen(order));
+        orderReceipts.put(orderNum, new OrderReceiptScreen(order.getOrderNumber()));
         return orderNum;
     }
 
@@ -45,5 +45,9 @@ public class OrderSystem {
 
     public Order getOrder(int orderNum){
         return  orderList.get(orderNum);
+    }
+
+    public OrderReceiptScreen orderReceipts(int orderNum){
+        return  orderReceipts.get(orderNum);
     }
 }

@@ -9,7 +9,7 @@ import java.awt.event.ActionListener;
 
 
 import static com.crenu.kiosk.KioskSystem.panelManager;
-import static com.crenu.kiosk.ui.entity.PanelNameEntity.*;
+import static com.crenu.kiosk.entity.PanelNameEntity.*;
 
 
 public class LoginScreen extends KioskPanel {
