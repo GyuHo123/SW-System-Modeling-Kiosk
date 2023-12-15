@@ -1,7 +1,8 @@
 package com.crenu.kiosk.placeOrder;
 
 
-import com.crenu.kiosk.ui.OrderSystemScreen;
+import com.crenu.kiosk.ui.screen.OrderManageScreen;
+import com.crenu.kiosk.ui.screen.OrderReceiptScreen;
 
 import java.util.HashMap;
 import java.util.Set;
@@ -11,9 +12,11 @@ import static com.crenu.kiosk.KioskSystem.cart;
 public class OrderSystem {
 
     private HashMap<Integer, Order> orderList;
+    private HashMap<Integer, OrderReceiptScreen> orderReceipts;
     private int orderNum;
     public OrderSystem(){
         orderList = new HashMap<>();
+        orderReceipts = new HashMap<>();
         orderNum = 0;
     }
 
@@ -23,12 +26,16 @@ public class OrderSystem {
         orderNum++;
         order.setOrderNumber(orderNum);
         orderList.put(orderNum, order);
-        new OrderSystemScreen(order);
+        orderReceipts.put(orderNum, new OrderReceiptScreen(order));
         return orderNum;
     }
 
+
+
     public void removeOrder(int orderNum){
         orderList.remove(orderNum);
+        orderReceipts.get(orderNum).dispose();
+        orderReceipts.remove(orderNum);
     }
 
     public Set<Integer> getOrderNumbers() {

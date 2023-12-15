@@ -1,4 +1,6 @@
-package com.crenu.kiosk.ui;
+package com.crenu.kiosk.ui.screen;
+
+import com.crenu.kiosk.ui.panel.KioskPanel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -6,14 +8,18 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 
-import static com.crenu.kiosk.KioskSystem.uiManager;
-import static com.crenu.kiosk.ui.PanelNameEntity.LOGIN_PANELNAME;
-import static com.crenu.kiosk.ui.PanelNameEntity.MANAGER_PANELNAME;
+import static com.crenu.kiosk.KioskSystem.panelManager;
+import static com.crenu.kiosk.ui.entity.PanelNameEntity.*;
 
 
-public class LoginScreen extends JPanel {
+public class LoginScreen extends KioskPanel {
 
     public LoginScreen() {
+        init();
+    }
+
+    @Override
+    public void init() {
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
         JButton btnLogin = new JButton("Login");
@@ -24,7 +30,7 @@ public class LoginScreen extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if(checkCredentials(userIDField.getText(), String.valueOf(passwordField.getPassword()))){
-                    turnToManagerScrren();
+                    panelManager.changePanel(MANAGER_PANELNAME.getName());
                 };
             }
         });
@@ -38,18 +44,10 @@ public class LoginScreen extends JPanel {
         backButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                uiManager.allPanelVisibleOff();
-                InitialScreen.init();
+                panelManager.changePanel(INITAL_PANELNAME.getName());
             }
         });
         add(backButton, BorderLayout.SOUTH);
-    }
-
-    public void turnToManagerScrren() {
-        ManagerScreen managerScreen = new ManagerScreen();
-        uiManager.addPanel(MANAGER_PANELNAME, managerScreen);
-        uiManager.allPanelVisibleOff();
-        uiManager.panelSetVisible(MANAGER_PANELNAME, true);
     }
 
     private boolean checkCredentials(String userID, String password) {
@@ -64,5 +62,10 @@ public class LoginScreen extends JPanel {
             JOptionPane.showMessageDialog(null, "Invalid credentials. Please try again.");
             return false;
         }
+    }
+
+    @Override
+    public void changeAction() {
+
     }
 }

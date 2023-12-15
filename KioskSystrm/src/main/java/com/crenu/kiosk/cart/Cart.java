@@ -8,6 +8,10 @@ public class Cart {
         cartItems = new ArrayList<>();
     }
 
+    public void clear(){
+        this.cartItems.clear();
+    }
+
     public ArrayList<CartItem> getCartItems(){
         return this.cartItems;
     }

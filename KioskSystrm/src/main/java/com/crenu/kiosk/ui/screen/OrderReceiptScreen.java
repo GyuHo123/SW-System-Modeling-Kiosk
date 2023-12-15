@@ -1,14 +1,14 @@
-package com.crenu.kiosk.ui;
+package com.crenu.kiosk.ui.screen;
 
 import com.crenu.kiosk.placeOrder.Order;
 
 import javax.swing.*;
 import java.awt.*;
 
-public class OrderSystemScreen extends JFrame {
+public class OrderReceiptScreen extends JFrame {
 
-    public OrderSystemScreen(Order order){
-        setSize(460, 600);
+    public OrderReceiptScreen(Order order){
+        setSize(460, 460);
         setTitle("ORDER" + order.getOrderNumber());
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new FlowLayout());

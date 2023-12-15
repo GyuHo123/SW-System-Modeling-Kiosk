@@ -1,47 +1,55 @@
-package com.crenu.kiosk.ui;
+package com.crenu.kiosk.ui.screen;
+
+import com.crenu.kiosk.ui.panel.KioskPanel;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import static com.crenu.kiosk.KioskSystem.uiManager;
-import static com.crenu.kiosk.ui.PanelNameEntity.*;
+import static com.crenu.kiosk.KioskSystem.panelManager;
+import static com.crenu.kiosk.ui.entity.PanelNameEntity.*;
 
-public class ManagerScreen extends JPanel {
+public class ManagerScreen extends KioskPanel {
     public ManagerScreen() {
+        init();
+    }
+
+    @Override
+    public void init() {
         setSize(460, 600);
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         JButton menuManageBtn = new JButton("Menu Manage");
         JButton orderManageBtn = new JButton("Order Manage");
-        add(menuManageBtn);
-        add(orderManageBtn);
 
         menuManageBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new MenuManageScreen();
+                panelManager.changePanel(MENU_MANAGE_PNAELNAME.getName());
             }
         });
 
         orderManageBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                OrderManageScreen orderManageScreen = new OrderManageScreen();
-                uiManager.addPanel(ORDER_MANAGE_PANELNAME, orderManageScreen);
-                uiManager.allPanelVisibleOff();
-                uiManager.panelSetVisible(ORDER_MANAGE_PANELNAME, true);
+                panelManager.changePanel(ORDER_MANAGE_PANELNAME.getName());
             }
         });
         JButton backButton = new JButton("back");
         backButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                uiManager.allPanelVisibleOff();
-                InitialScreen.init();
+                panelManager.changePanel(INITAL_PANELNAME.getName());
             }
         });
+
         add(backButton, BorderLayout.SOUTH);
+        add(menuManageBtn);
+        add(orderManageBtn);
     }
 
+    @Override
+    public void changeAction() {
+
+    }
 }

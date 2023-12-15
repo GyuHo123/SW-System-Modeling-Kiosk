@@ -1,29 +1,41 @@
-package com.crenu.kiosk.ui;
+package com.crenu.kiosk.ui.screen;
 
 import com.crenu.kiosk.KioskSystem;
 import com.crenu.kiosk.cart.CartItem;
-import com.crenu.kiosk.placeOrder.Order;
+import com.crenu.kiosk.ui.panel.KioskPanel;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.PrimitiveIterator;
 
 import static com.crenu.kiosk.KioskSystem.*;
-import static com.crenu.kiosk.ui.PanelNameEntity.*;
-import static com.crenu.kiosk.ui.PanelNameEntity.LOGIN_PANELNAME;
+import static com.crenu.kiosk.ui.entity.PanelNameEntity.*;
 
-public class CartScreen {
-    private JPanel main;
+public class CartScreen extends KioskPanel {
     private JPanel itemListPanel;
     public CartScreen(){
-        this.main = new JPanel();
-        this.main.setLayout(new BorderLayout());
-        uiManager.addPanel(CART_PNAELNAME, this.main);
-
+        init();
+    }
+    @Override
+    public void init() {
+        setLayout(new BorderLayout());
         initItemList();
         initPayment();
+    }
+
+    @Override
+    public void changeAction() {
+        updateItemList();
+    }
+
+    private void updateItemList(){
+        itemListPanel.removeAll();
+        for(CartItem item : cart.getCartItems()){
+            addItemPanel(item);
+        }
+        itemListPanel.revalidate();
+        itemListPanel.repaint();
     }
 
     private void initItemList(){
@@ -31,14 +43,7 @@ public class CartScreen {
         itemListPanel.setLayout(new FlowLayout());
         itemListPanel.setPreferredSize(new Dimension(860, 800));
         itemListPanel.setBackground(Color.YELLOW);
-
-        for(CartItem item : cart.getCartItems()){
-            addItemPanel(item);
-        }
-
-        this.main.add(itemListPanel, BorderLayout.NORTH);
-        itemListPanel.revalidate();
-        itemListPanel.repaint();
+        add(itemListPanel, BorderLayout.NORTH);
     }
 
     private void addItemPanel(CartItem item){
@@ -82,7 +87,7 @@ public class CartScreen {
 
     private void showResultDialog(int orderNum){
         // Create a modal dialog that blocks input to other windows
-        JDialog jd = new JDialog(uiManager, "Order Result", Dialog.ModalityType.APPLICATION_MODAL);
+        JDialog jd = new JDialog(panelManager, "Order Result", Dialog.ModalityType.APPLICATION_MODAL);
         jd.setLayout(new FlowLayout());
         jd.setBounds(430, 540, 200, 120);
 
@@ -93,7 +98,7 @@ public class CartScreen {
             @Override
             public void actionPerformed(ActionEvent e) {
                 jd.dispose(); // Close the dialog
-                KioskSystem.init(); // Reset the system or perform necessary actions after closing the dialog
+                panelManager.changePanel(INITAL_PANELNAME.getName());
             }
         });
 
@@ -107,14 +112,13 @@ public class CartScreen {
         JPanel paymentPanel = new JPanel();
         paymentPanel.setLayout(new GridLayout());
         paymentPanel.setPreferredSize(new Dimension(860, 200));
-        this.main.add(paymentPanel, BorderLayout.SOUTH);
+        add(paymentPanel, BorderLayout.SOUTH);
         JButton back = new JButton("BACK");
         paymentPanel.add(back, BorderLayout.SOUTH);
         back.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                uiManager.allPanelVisibleOff();
-                uiManager.panelSetVisible(MENU_PANELNAME, true);
+                panelManager.changePanel(MENU_PANELNAME.getName());
             }
         });
         JButton creditButton = new JButton("CARD");
@@ -127,5 +131,6 @@ public class CartScreen {
         });
         paymentPanel.add(creditButton, BorderLayout.NORTH);
     }
+
 
 }

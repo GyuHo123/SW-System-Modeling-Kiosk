@@ -1,6 +1,7 @@
-package com.crenu.kiosk.ui;
+package com.crenu.kiosk.ui.screen;
 
 import com.crenu.kiosk.placeOrder.Order;
+import com.crenu.kiosk.ui.panel.KioskPanel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -8,14 +9,18 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import static com.crenu.kiosk.KioskSystem.orderSystem;
-import static com.crenu.kiosk.KioskSystem.uiManager;
-import static com.crenu.kiosk.ui.PanelNameEntity.LOGIN_PANELNAME;
-import static com.crenu.kiosk.ui.PanelNameEntity.MANAGER_PANELNAME;
+import static com.crenu.kiosk.KioskSystem.panelManager;
+import static com.crenu.kiosk.ui.entity.PanelNameEntity.MANAGER_PANELNAME;
 
-public class OrderManageScreen extends JPanel {
+public class OrderManageScreen extends KioskPanel {
     private JPanel orderListPanel;
 
     public OrderManageScreen() {
+        init();
+    }
+
+    @Override
+    public void init() {
         setLayout(new BorderLayout());
         initOrderList();
 
@@ -23,13 +28,15 @@ public class OrderManageScreen extends JPanel {
         backButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                ManagerScreen managerScreen = new ManagerScreen();
-                uiManager.addPanel(MANAGER_PANELNAME, managerScreen);
-                uiManager.allPanelVisibleOff();
-                uiManager.panelSetVisible(MANAGER_PANELNAME, true);
+                panelManager.changePanel(MANAGER_PANELNAME.getName());
             }
         });
         add(backButton,BorderLayout.SOUTH);
+    }
+
+    @Override
+    public void changeAction() {
+        updateOrderList();
     }
 
     private void initOrderList() {
@@ -37,17 +44,20 @@ public class OrderManageScreen extends JPanel {
         orderListPanel.setLayout(new FlowLayout());
         orderListPanel.setPreferredSize(new Dimension(860, 800));
 
-        for (Integer orderNum : orderSystem.getOrderNumbers()) {
-            Order order = orderSystem.getOrder(orderNum);
-            addOrderPanel(order);
-        }
-
         JScrollPane scrollPane = new JScrollPane(orderListPanel);
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
         add(scrollPane, BorderLayout.CENTER);
     }
 
+    private void updateOrderList(){
+        for (Integer orderNum : orderSystem.getOrderNumbers()) {
+            Order order = orderSystem.getOrder(orderNum);
+            addOrderPanel(order);
+        }
+    }
+
     private void addOrderPanel(Order order) {
+        orderListPanel.removeAll();
         JPanel orderPanel = new JPanel();
         orderPanel.setLayout(new BorderLayout());
         orderPanel.setPreferredSize(new Dimension(860, 100));
@@ -62,5 +72,10 @@ public class OrderManageScreen extends JPanel {
         orderPanel.add(orderDetails, BorderLayout.CENTER);
         orderPanel.add(completeButton, BorderLayout.EAST);
         orderListPanel.add(orderPanel);
+        orderListPanel.revalidate();
+        orderListPanel.repaint();
+
     }
+
+
 }
