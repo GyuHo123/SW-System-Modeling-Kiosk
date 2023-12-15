@@ -13,9 +13,6 @@ import static com.crenu.kiosk.entity.PanelNameEntity.*;
 
 public class CartScreen extends KioskPanel {
     private JPanel itemListPanel;
-    public CartScreen(){
-        init();
-    }
     @Override
     public void init() {
         setLayout(new BorderLayout());

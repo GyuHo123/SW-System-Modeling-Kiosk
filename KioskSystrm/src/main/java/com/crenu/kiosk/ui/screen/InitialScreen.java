@@ -12,10 +12,6 @@ import static com.crenu.kiosk.KioskSystem.panelManager;
 import static com.crenu.kiosk.entity.PanelNameEntity.*;
 
 public class InitialScreen extends KioskPanel {
-    public InitialScreen() {
-        init();
-    }
-
     @Override
     public void init() {
         setLayout(new BorderLayout());

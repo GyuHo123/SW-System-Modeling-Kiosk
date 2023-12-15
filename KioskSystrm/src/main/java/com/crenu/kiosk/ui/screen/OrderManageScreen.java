@@ -15,9 +15,6 @@ import static com.crenu.kiosk.entity.PanelNameEntity.MANAGER_PANELNAME;
 public class OrderManageScreen extends KioskPanel {
     private JPanel orderListPanel;
 
-    public OrderManageScreen() {
-        init();
-    }
 
     @Override
     public void init() {

@@ -29,7 +29,6 @@ public class OrderReceiptScreen extends JFrame {
     }
 
     public void compeleteState(){
-        System.out.println(orderNum);
         String infostr = orderSystem.getOrder(orderNum).toString() + "\n" + "State : Compelete";
         infoText.setText("<html>" + infostr.replaceAll("<","&lt;").replaceAll(">",
                 "&gt;").replaceAll("\n", "<br/>") + "</html>");

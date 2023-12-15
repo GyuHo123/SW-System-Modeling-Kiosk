@@ -11,10 +11,6 @@ import static com.crenu.kiosk.KioskSystem.panelManager;
 import static com.crenu.kiosk.entity.PanelNameEntity.*;
 
 public class ManagerScreen extends KioskPanel {
-    public ManagerScreen() {
-        init();
-    }
-
     @Override
     public void init() {
         setSize(460, 600);

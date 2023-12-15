@@ -16,9 +16,6 @@ public class MenuManageScreen extends KioskPanel {
     JPanel menuListPanel;
     JPanel menuEditPanel;
 
-    public MenuManageScreen(){
-        init();
-    }
 
     @Override
     public void init() {

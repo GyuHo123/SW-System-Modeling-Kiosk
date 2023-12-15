@@ -22,9 +22,6 @@ public class MenuDisplayScreen extends KioskPanel {
     private CartItem selectItem;
     private Category initCategory = Category.MAIN;
 
-    public MenuDisplayScreen() {
-        init();
-    }
     @Override
     public void init() {
         setLayout(new BorderLayout());

@@ -14,10 +14,6 @@ import static com.crenu.kiosk.entity.PanelNameEntity.*;
 
 public class LoginScreen extends KioskPanel {
 
-    public LoginScreen() {
-        init();
-    }
-
     @Override
     public void init() {
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
