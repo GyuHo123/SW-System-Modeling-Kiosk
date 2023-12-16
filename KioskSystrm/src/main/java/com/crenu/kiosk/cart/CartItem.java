@@ -1,7 +1,7 @@
 package com.crenu.kiosk.cart;
 
 import com.crenu.kiosk.admin.Item;
-import com.crenu.kiosk.menu.Category;
+import com.crenu.kiosk.entity.Category;
 
 import java.util.ArrayList;
 

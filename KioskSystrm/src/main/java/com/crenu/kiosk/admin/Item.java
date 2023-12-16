@@ -1,8 +1,6 @@
 package com.crenu.kiosk.admin;
 
-import com.crenu.kiosk.menu.Category;
-
-import java.util.ArrayList;
+import com.crenu.kiosk.entity.Category;
 
 public class Item {
     private String name;

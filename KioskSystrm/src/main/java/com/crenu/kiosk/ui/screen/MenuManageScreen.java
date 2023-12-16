@@ -1,24 +1,35 @@
-package com.crenu.kiosk.ui;
+package com.crenu.kiosk.ui.screen;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import com.crenu.kiosk.admin.MenuManager;
-import com.crenu.kiosk.menu.Category;
+import com.crenu.kiosk.entity.Category;
 import com.crenu.kiosk.menu.Menu;
-import static com.crenu.kiosk.KioskSystem.*;
-import static com.crenu.kiosk.ui.PanelNameEntity.*;
+import com.crenu.kiosk.ui.panel.KioskPanel;
 
-public class MenuManageScreen extends JPanel{
+import static com.crenu.kiosk.KioskSystem.*;
+import static com.crenu.kiosk.entity.PanelName.*;
+
+public class MenuManageScreen extends KioskPanel {
     JPanel menuListPanel;
     JPanel menuEditPanel;
 
-    public MenuManageScreen(){
+
+    @Override
+    public void init() {
         setLayout(new BorderLayout());
-        uiManager.allPanelVisibleOff();
-        uiManager.addPanel(MENU_MANAGE_PNAELNAME, this);
+        //hard coding
+        menuManager.addMenuItem(new com.crenu.kiosk.menu.Menu("Bulgogi Burger", 8, Category.MAIN));
+        menuManager.addMenuItem(new com.crenu.kiosk.menu.Menu("Cheese Burger", 7, Category.MAIN));
+        menuManager.addMenuItem(new Menu("Veggie Burger", 6, Category.MAIN));
+        menuManager.addMenuItem(new Menu("Cola", 1, Category.DRINK));
+        menuManager.addMenuItem(new Menu("Water", 1, Category.DRINK));
+        menuManager.addMenuItem(new Menu("Lemonade", 1, Category.DRINK));
+        menuManager.addMenuItem(new Menu("Cola", 1, Category.SIDE));
+        menuManager.addMenuItem(new Menu("Water", 1, Category.SIDE));
+        menuManager.addMenuItem(new Menu("Lemonade", 1, Category.SIDE));
 
         initMenuList();
         initMenuEdit();
@@ -27,17 +38,15 @@ public class MenuManageScreen extends JPanel{
         backButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                ManagerScreen managerScreen = new ManagerScreen();
-                uiManager.addPanel(MANAGER_PANELNAME, managerScreen);
-                uiManager.allPanelVisibleOff();
-                uiManager.panelSetVisible(MANAGER_PANELNAME, true);
+                panelManager.changePanel(MANAGER_PANELNAME.getName());
             }
         });
         add(backButton,BorderLayout.SOUTH);
+    }
 
+    @Override
+    public void changeAction() {
 
-        revalidate();
-        repaint();
     }
 
     private void initMenuList(){
@@ -120,4 +129,6 @@ public class MenuManageScreen extends JPanel{
         menuListPanel.revalidate();
         menuListPanel.repaint();
     }
+
+
 }

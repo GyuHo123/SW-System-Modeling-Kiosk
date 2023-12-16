@@ -1,8 +1,9 @@
-package com.crenu.kiosk.ui;
+package com.crenu.kiosk.ui.screen;
 
 import com.crenu.kiosk.cart.CartItem;
-import com.crenu.kiosk.menu.Category;
+import com.crenu.kiosk.entity.Category;
 import com.crenu.kiosk.menu.Menu;
+import com.crenu.kiosk.ui.panel.KioskPanel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -10,33 +11,20 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import static com.crenu.kiosk.KioskSystem.*;
-import static com.crenu.kiosk.ui.PanelNameEntity.CART_PNAELNAME;
-import static com.crenu.kiosk.ui.PanelNameEntity.MENU_PANELNAME;
+import static com.crenu.kiosk.entity.PanelName.CART_PNAELNAME;
 
-public class MenuDisplayScreen{
-    private JPanel main;
+public class MenuDisplayScreen extends KioskPanel {
     private JPanel menuPanel;
     private JPanel infoPanel;
 
+    private JButton addItemButton;
 
     private CartItem selectItem;
+    private Category initCategory = Category.MAIN;
 
-    public MenuDisplayScreen() {
-
-        //hard coding
-        menuManager.addMenuItem(new com.crenu.kiosk.menu.Menu("Bulgogi Burger", 8, Category.MAIN));
-        menuManager.addMenuItem(new com.crenu.kiosk.menu.Menu("Cheese Burger", 7, Category.MAIN));
-        menuManager.addMenuItem(new Menu("Veggie Burger", 6, Category.MAIN));
-        menuManager.addMenuItem(new Menu("Cola", 1, Category.DRINK));
-        menuManager.addMenuItem(new Menu("Water", 1, Category.DRINK));
-        menuManager.addMenuItem(new Menu("Lemonade", 1, Category.DRINK));
-        menuManager.addMenuItem(new Menu("Cola", 1, Category.SIDE));
-        menuManager.addMenuItem(new Menu("Water", 1, Category.SIDE));
-        menuManager.addMenuItem(new Menu("Lemonade", 1, Category.SIDE));
-
-        this.main = new JPanel();
-        this.main.setLayout(new BorderLayout());
-        uiManager.addPanel(MENU_PANELNAME, this.main);
+    @Override
+    public void init() {
+        setLayout(new BorderLayout());
 
         initSelectPanel();
         initMenuPanel();
@@ -54,6 +42,12 @@ public class MenuDisplayScreen{
 //        this.main.add(backButton, BorderLayout.SOUTH);
     }
 
+    @Override
+    public void changeAction() {
+        updateCartItemCountText();
+        setMenuPanel(initCategory);
+    }
+
     private void initSelectPanel(){
         JPanel selectPanel = new JPanel();
         selectPanel.setLayout(new GridLayout(0, Category.values().length, 10, 10));
@@ -61,7 +55,7 @@ public class MenuDisplayScreen{
         for(Category category : Category.values()){
             addSelectButton(selectPanel, category);
         }
-        this.main.add(selectPanel, BorderLayout.NORTH);
+        add(selectPanel, BorderLayout.NORTH);
     }
 
     private void addSelectButton(JPanel panel, Category category) {
@@ -80,16 +74,13 @@ public class MenuDisplayScreen{
         menuPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
         menuPanel.setPreferredSize(new Dimension(800, 400));
         menuPanel.setBackground(Color.BLUE);
-        this.main.add(menuPanel, BorderLayout.CENTER);
+        add(menuPanel, BorderLayout.CENTER);
     }
 
     private void setMenuPanel(Category category){
-        for(Component com : menuPanel.getComponents()){
-            menuPanel.remove(com);
-        }
+        menuPanel.removeAll();
         for(Menu item :  menuManager.getMenuItemsByCategory(category)){
             addMenuButton(menuPanel, item);
-            System.out.println(item.getName());
         }
         menuPanel.revalidate();
         menuPanel.repaint();
@@ -112,7 +103,7 @@ public class MenuDisplayScreen{
         infoPanel.setLayout(new BorderLayout());
         infoPanel.setPreferredSize(new Dimension(860, 300));
         infoPanel.setBackground(Color.red);
-        this.main.add(infoPanel, BorderLayout.SOUTH);
+        add(infoPanel, BorderLayout.SOUTH);
     }
 
     private void upateInfo(Menu menu){
@@ -154,14 +145,8 @@ public class MenuDisplayScreen{
 
     }
 
-    private void clearSelectItem(){
-        for(Component com : infoPanel.getComponents()){
-            infoPanel.remove(com);
-        }
-        selectItem = null;
-        initFunctionPanel();
-        infoPanel.revalidate();
-        infoPanel.repaint();
+    private void updateCartItemCountText(){
+        addItemButton.setText("ADD ITEM : " + cart.getCartItems().size());
     }
 
     private void initFunctionPanel(){
@@ -169,7 +154,7 @@ public class MenuDisplayScreen{
         funPanel.setLayout(new GridLayout(0, 2));
         funPanel.setPreferredSize(new Dimension(860, 100));
         funPanel.setBackground(Color.YELLOW);
-        JButton addItemButton = new JButton("ADD ITEM : " + cart.getCartItems().size());
+        addItemButton = new JButton("ADD ITEM : " + cart.getCartItems().size());
 
         addItemButton.addActionListener(new ActionListener() {
             @Override
@@ -186,14 +171,23 @@ public class MenuDisplayScreen{
         payButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-               new CartScreen();
-                uiManager.allPanelVisibleOff();
-                uiManager.panelSetVisible(CART_PNAELNAME, true);
+                panelManager.changePanel(CART_PNAELNAME.getName());
             }
         });
         funPanel.add(payButton);
         infoPanel.add(funPanel, BorderLayout.SOUTH);
     }
+
+    private void clearSelectItem(){
+        for(Component com : infoPanel.getComponents()){
+            infoPanel.remove(com);
+        }
+        selectItem = null;
+        initFunctionPanel();
+        infoPanel.revalidate();
+        infoPanel.repaint();
+    }
+
 
 
 }

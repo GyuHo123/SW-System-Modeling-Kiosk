@@ -1,4 +1,4 @@
-package com.crenu.kiosk.menu;
+package com.crenu.kiosk.entity;
 
 public enum Category {
     MAIN(1),

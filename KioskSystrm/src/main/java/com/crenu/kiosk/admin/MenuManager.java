@@ -1,10 +1,8 @@
 package com.crenu.kiosk.admin;
 
-import com.crenu.kiosk.menu.Category;
+import com.crenu.kiosk.entity.Category;
 import com.crenu.kiosk.menu.Menu;
 import javax.swing.*;
-import java.awt.*;
-import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
