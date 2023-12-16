@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Map;
 
 import com.crenu.kiosk.entity.Category;
 import com.crenu.kiosk.menu.Menu;
@@ -20,6 +21,9 @@ public class MenuManageScreen extends KioskPanel {
     private JTextField nameField = new JTextField(20);
     private JTextField priceField = new JTextField(20);
     private JComboBox<Category> categoryComboBox = new JComboBox<>(Category.values());
+
+    private record MenuInfo(String name, Integer price, Category category){
+    };
 
 
     @Override
@@ -66,7 +70,7 @@ public class MenuManageScreen extends KioskPanel {
         btnAdd.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                addMenuInfo();
+                addMenu();
             }
         });
 
@@ -77,15 +81,19 @@ public class MenuManageScreen extends KioskPanel {
         add(menuEditPanel);
     }
 
-    public void addMenuInfo(){
+    public MenuInfo addMenuInfo() {
+        // Retrieve values from UI components
         String name = nameField.getText();
         Integer price = Integer.parseInt(priceField.getText());
-        Category category = (Category)categoryComboBox.getSelectedItem();
-        addMenu(name, price, category);
+        Category category = (Category) categoryComboBox.getSelectedItem();
+
+        // Return a new instance of the MenuInfo record
+        return new MenuInfo(name, price, category);
     }
 
-    public void addMenu(String name, Integer price, Category category){
-        Menu menu = new Menu(name, price, category);
+    public void addMenu(){
+        MenuInfo menuInformation = addMenuInfo();
+        Menu menu = new Menu(menuInformation.name(), menuInformation.price(), menuInformation.category());
         removeMenu(menu); //remove a menu with the same name
         menuManager.addMenuItem(menu);
         addMenuPanel(menu);
