@@ -13,8 +13,13 @@ import static com.crenu.kiosk.KioskSystem.*;
 import static com.crenu.kiosk.entity.PanelName.*;
 
 public class MenuManageScreen extends KioskPanel {
-    JPanel menuListPanel;
-    JPanel menuEditPanel;
+    private JPanel menuListPanel;
+    private JPanel menuEditPanel;
+
+    private JButton btnAdd = new JButton("Add Menu");
+    private JTextField nameField = new JTextField(20);
+    private JTextField priceField = new JTextField(20);
+    private JComboBox<Category> categoryComboBox = new JComboBox<>(Category.values());
 
 
     @Override
@@ -58,18 +63,10 @@ public class MenuManageScreen extends KioskPanel {
         menuEditPanel.setPreferredSize(new Dimension(840,100));
         menuEditPanel.setBackground(Color.YELLOW);
 
-        JButton btnAdd = new JButton("Add Menu");
-        JTextField nameField = new JTextField(20);
-        JTextField priceField = new JTextField(20);
-        JComboBox<Category> categoryComboBox = new JComboBox<>(Category.values());
-
         btnAdd.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String name = nameField.getText();
-                Integer price = Integer.parseInt(priceField.getText());
-                Category category = (Category)categoryComboBox.getSelectedItem();
-                addMenu(name, price, category);
+                addMenuInfo();
             }
         });
 
@@ -78,6 +75,13 @@ public class MenuManageScreen extends KioskPanel {
         menuEditPanel.add(categoryComboBox);
         menuEditPanel.add(btnAdd);
         add(menuEditPanel);
+    }
+
+    public void addMenuInfo(){
+        String name = nameField.getText();
+        Integer price = Integer.parseInt(priceField.getText());
+        Category category = (Category)categoryComboBox.getSelectedItem();
+        addMenu(name, price, category);
     }
 
     public void addMenu(String name, Integer price, Category category){
