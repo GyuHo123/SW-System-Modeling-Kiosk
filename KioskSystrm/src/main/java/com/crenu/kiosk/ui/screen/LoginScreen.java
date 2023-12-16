@@ -42,7 +42,7 @@ public class LoginScreen extends KioskPanel {
         backButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                panelManager.changePanel(INITAL_PANELNAME.getName());
+                panelManager.changePanel(INITIAL_PANELNAME.getName());
             }
         });
         add(backButton, BorderLayout.SOUTH);

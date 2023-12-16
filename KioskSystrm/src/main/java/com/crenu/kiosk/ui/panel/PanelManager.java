@@ -18,17 +18,17 @@ public class PanelManager extends JFrame {
         panels = new HashMap<>();
 
         initAddPanel();
-        panelSetVisible(INITAL_PANELNAME.getName(), true);
+        panelSetVisible(INITIAL_PANELNAME.getName(), true);
         setVisible(true);
     }
 
     public void initAddPanel(){
-        addPanel(INITAL_PANELNAME.getName(), new InitialScreen());
+        addPanel(INITIAL_PANELNAME.getName(), new InitialScreen());
         addPanel(MENU_PANELNAME.getName(), new MenuDisplayScreen());
         addPanel(LOGIN_PANELNAME.getName(), new LoginScreen());
-        addPanel(CART_PNAELNAME.getName(), new CartScreen());
+        addPanel(CART_PANELNAME.getName(), new CartScreen());
         addPanel(MANAGER_PANELNAME.getName(), new ManagerScreen());
-        addPanel(MENU_MANAGE_PNAELNAME.getName(), new MenuManageScreen());
+        addPanel(MENU_MANAGE_PANELNAME.getName(), new MenuManageScreen());
         addPanel(ORDER_MANAGE_PANELNAME.getName(), new OrderManageScreen());
     }
 
