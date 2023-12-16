@@ -64,13 +64,12 @@ public class OrderManageScreen extends KioskPanel {
 
         JButton checkButton = new JButton("Check");
         checkButton.addActionListener(e -> {
-            orderSystem.updateOrderState(orderNum, OrderState.COOKING);
+            checkOrder(orderNum);
         });
 
         JButton cancleButton = new JButton("Cancle");
         cancleButton.addActionListener(e -> {
-            orderSystem.updateOrderState(orderNum, OrderState.CANCLE);
-            orderSystem.removeOrder(orderNum);
+            cancleOrder(orderNum);
             orderPanel.setVisible(false);
             orderListPanel.revalidate();
             orderListPanel.repaint();
@@ -78,13 +77,12 @@ public class OrderManageScreen extends KioskPanel {
 
         JButton completeButton = new JButton("Complete");
         completeButton.addActionListener(e -> {
-            orderSystem.updateOrderState(orderNum, OrderState.COMPLETE);
+            completeOrder(orderNum);
         });
 
-        JButton recallCompeleteButton = new JButton("Recall Compelete");
-        recallCompeleteButton.addActionListener(e -> {
-            orderSystem.removeOrder(orderNum);
-            orderSystem.removeOrderReceipts(orderNum);
+        JButton recallCompleteButton = new JButton("Recall Compelete");
+        recallCompleteButton.addActionListener(e -> {
+            recallCompleteOrder(orderNum);
             orderPanel.setVisible(false);
             orderListPanel.revalidate();
             orderListPanel.repaint();
@@ -94,11 +92,24 @@ public class OrderManageScreen extends KioskPanel {
         orderPanel.add(checkButton);
         orderPanel.add(cancleButton);
         orderPanel.add(completeButton);
-        orderPanel.add(recallCompeleteButton);
+        orderPanel.add(recallCompleteButton);
         orderListPanel.add(orderPanel);
         orderListPanel.revalidate();
         orderListPanel.repaint();
     }
 
-
+    public void checkOrder(Integer orderNum){
+        orderSystem.updateOrderState(orderNum, OrderState.COOKING);
+    }
+    public void cancleOrder(Integer orderNum){
+        orderSystem.updateOrderState(orderNum, OrderState.CANCLE);
+        orderSystem.removeOrder(orderNum);
+    }
+    public void completeOrder(Integer orderNum){
+        orderSystem.updateOrderState(orderNum, OrderState.COMPLETE);
+    }
+    public void recallCompleteOrder(Integer orderNum){
+        orderSystem.removeOrder(orderNum);
+        orderSystem.removeOrderReceipts(orderNum);
+    }
 }

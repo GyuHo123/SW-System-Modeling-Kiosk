@@ -20,16 +20,6 @@ public class MenuManageScreen extends KioskPanel {
     @Override
     public void init() {
         setLayout(new BorderLayout());
-        //hard coding
-        menuManager.addMenuItem(new com.crenu.kiosk.menu.Menu("Bulgogi Burger", 8, Category.MAIN));
-        menuManager.addMenuItem(new com.crenu.kiosk.menu.Menu("Cheese Burger", 7, Category.MAIN));
-        menuManager.addMenuItem(new Menu("Veggie Burger", 6, Category.MAIN));
-        menuManager.addMenuItem(new Menu("Cola", 1, Category.DRINK));
-        menuManager.addMenuItem(new Menu("Water", 1, Category.DRINK));
-        menuManager.addMenuItem(new Menu("Lemonade", 1, Category.DRINK));
-        menuManager.addMenuItem(new Menu("Cola", 1, Category.SIDE));
-        menuManager.addMenuItem(new Menu("Water", 1, Category.SIDE));
-        menuManager.addMenuItem(new Menu("Lemonade", 1, Category.SIDE));
 
         initMenuList();
         initMenuEdit();
@@ -79,10 +69,7 @@ public class MenuManageScreen extends KioskPanel {
                 String name = nameField.getText();
                 Integer price = Integer.parseInt(priceField.getText());
                 Category category = (Category)categoryComboBox.getSelectedItem();
-                Menu menu = new Menu(name, price, category);
-                removeMenu(menu); //remove a menu with the same name
-                menuManager.addMenuItem(menu);
-                addMenuPanel(menu);
+                addMenu(name, price, category);
             }
         });
 
@@ -91,6 +78,13 @@ public class MenuManageScreen extends KioskPanel {
         menuEditPanel.add(categoryComboBox);
         menuEditPanel.add(btnAdd);
         add(menuEditPanel);
+    }
+
+    public void addMenu(String name, Integer price, Category category){
+        Menu menu = new Menu(name, price, category);
+        removeMenu(menu); //remove a menu with the same name
+        menuManager.addMenuItem(menu);
+        addMenuPanel(menu);
     }
 
     private void addMenuPanel(Menu menu){

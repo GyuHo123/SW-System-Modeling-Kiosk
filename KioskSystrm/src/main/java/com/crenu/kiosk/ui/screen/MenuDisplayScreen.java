@@ -12,6 +12,7 @@ import java.awt.event.ActionListener;
 
 import static com.crenu.kiosk.KioskSystem.*;
 import static com.crenu.kiosk.entity.PanelName.CART_PNAELNAME;
+import static com.crenu.kiosk.entity.PanelName.INITAL_PANELNAME;
 
 public class MenuDisplayScreen extends KioskPanel {
     private JPanel menuPanel;
@@ -30,16 +31,6 @@ public class MenuDisplayScreen extends KioskPanel {
         initMenuPanel();
         initInfoPanel();
         initFunctionPanel();
-
-//        JButton backButton = new JButton("back");
-//        backButton.addActionListener(new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//                uiManager.allPanelVisibleOff();
-//                InitialScreen.init();
-//            }
-//        });
-//        this.main.add(backButton, BorderLayout.SOUTH);
     }
 
     @Override
@@ -151,7 +142,7 @@ public class MenuDisplayScreen extends KioskPanel {
 
     private void initFunctionPanel(){
         JPanel funPanel = new JPanel();
-        funPanel.setLayout(new GridLayout(0, 2));
+        funPanel.setLayout(new GridLayout(0, 3));
         funPanel.setPreferredSize(new Dimension(860, 100));
         funPanel.setBackground(Color.YELLOW);
         addItemButton = new JButton("ADD ITEM : " + cart.getCartItems().size());
@@ -159,11 +150,7 @@ public class MenuDisplayScreen extends KioskPanel {
         addItemButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if(selectItem == null){
-                    return;
-                }
-                cart.addCartItem(selectItem);
-                clearSelectItem();
+                addItem();
             }
         });
         funPanel.add(addItemButton);
@@ -175,7 +162,25 @@ public class MenuDisplayScreen extends KioskPanel {
             }
         });
         funPanel.add(payButton);
+
+        JButton backButton = new JButton("back");
+        backButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                panelManager.changePanel(INITAL_PANELNAME.getName());
+            }
+        });
+        funPanel.add(backButton);
+
         infoPanel.add(funPanel, BorderLayout.SOUTH);
+    }
+
+    public void addItem(){
+        if(selectItem == null){
+            return;
+        }
+        cart.addCartItem(selectItem);
+        clearSelectItem();
     }
 
     private void clearSelectItem(){
