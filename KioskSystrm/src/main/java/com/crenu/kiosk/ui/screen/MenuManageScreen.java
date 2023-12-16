@@ -17,14 +17,8 @@ public class MenuManageScreen extends KioskPanel {
     private JPanel menuListPanel;
     private JPanel menuEditPanel;
 
-    private JButton btnAdd = new JButton("Add Menu");
-    private JTextField nameField = new JTextField(20);
-    private JTextField priceField = new JTextField(20);
-    private JComboBox<Category> categoryComboBox = new JComboBox<>(Category.values());
-
     private record MenuInfo(String name, Integer price, Category category){
     };
-
 
     @Override
     public void init() {
@@ -67,10 +61,23 @@ public class MenuManageScreen extends KioskPanel {
         menuEditPanel.setPreferredSize(new Dimension(840,100));
         menuEditPanel.setBackground(Color.YELLOW);
 
+        JButton btnAdd = new JButton("Add Menu");
+        JTextField nameField = new JTextField(20);
+        JTextField priceField = new JTextField(20);
+        JComboBox<Category> categoryComboBox = new JComboBox<>(Category.values());
+
         btnAdd.addActionListener(new ActionListener() {
+            public MenuInfo inputMenuInfo() {
+                // Retrieve values from UI components
+                String name = nameField.getText();
+                Integer price = Integer.parseInt(priceField.getText());
+                Category category = (Category) categoryComboBox.getSelectedItem();
+                // Return a new instance of the MenuInfo record
+                return new MenuInfo(name, price, category);
+            }
             @Override
             public void actionPerformed(ActionEvent e) {
-                addMenu();
+                addMenu(inputMenuInfo());
             }
         });
 
@@ -80,19 +87,7 @@ public class MenuManageScreen extends KioskPanel {
         menuEditPanel.add(btnAdd);
         add(menuEditPanel);
     }
-
-    public MenuInfo addMenuInfo() {
-        // Retrieve values from UI components
-        String name = nameField.getText();
-        Integer price = Integer.parseInt(priceField.getText());
-        Category category = (Category) categoryComboBox.getSelectedItem();
-
-        // Return a new instance of the MenuInfo record
-        return new MenuInfo(name, price, category);
-    }
-
-    public void addMenu(){
-        MenuInfo menuInformation = addMenuInfo();
+    public void addMenu(MenuInfo menuInformation){
         Menu menu = new Menu(menuInformation.name(), menuInformation.price(), menuInformation.category());
         removeMenu(menu); //remove a menu with the same name
         menuManager.addMenuItem(menu);
