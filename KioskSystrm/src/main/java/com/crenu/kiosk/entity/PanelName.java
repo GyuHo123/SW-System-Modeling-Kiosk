@@ -1,12 +1,12 @@
 package com.crenu.kiosk.entity;
 
 public enum PanelName {
-    INITAL_PANELNAME("InitialScreen"),
+    INITIAL_PANELNAME("InitialScreen"),
     MENU_PANELNAME("MenuDisplayScreen"),
     LOGIN_PANELNAME("LoginScreen"),
-    CART_PNAELNAME("CartScreen"),
+    CART_PANELNAME("CartScreen"),
     MANAGER_PANELNAME("ManagerScreen"),
-    MENU_MANAGE_PNAELNAME("MenuManageScreen"),
+    MENU_MANAGE_PANELNAME("MenuManageScreen"),
     ORDER_MANAGE_PANELNAME("OrderManageScreen");
     final private String name;
     PanelName(String name) {

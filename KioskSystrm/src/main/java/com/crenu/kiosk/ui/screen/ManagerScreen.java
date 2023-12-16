@@ -21,7 +21,7 @@ public class ManagerScreen extends KioskPanel {
         menuManageBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                panelManager.changePanel(MENU_MANAGE_PNAELNAME.getName());
+                panelManager.changePanel(MENU_MANAGE_PANELNAME.getName());
             }
         });
 
@@ -35,7 +35,7 @@ public class ManagerScreen extends KioskPanel {
         backButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                panelManager.changePanel(INITAL_PANELNAME.getName());
+                panelManager.changePanel(INITIAL_PANELNAME.getName());
             }
         });
 

@@ -94,7 +94,7 @@ public class CartScreen extends KioskPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 jd.dispose(); // Close the dialog
-                panelManager.changePanel(INITAL_PANELNAME.getName());
+                panelManager.changePanel(INITIAL_PANELNAME.getName());
             }
         });
 

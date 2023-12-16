@@ -11,8 +11,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import static com.crenu.kiosk.KioskSystem.*;
-import static com.crenu.kiosk.entity.PanelName.CART_PNAELNAME;
-import static com.crenu.kiosk.entity.PanelName.INITAL_PANELNAME;
+import static com.crenu.kiosk.entity.PanelName.CART_PANELNAME;
+import static com.crenu.kiosk.entity.PanelName.INITIAL_PANELNAME;
 
 public class MenuDisplayScreen extends KioskPanel {
     private JPanel menuPanel;
@@ -83,7 +83,7 @@ public class MenuDisplayScreen extends KioskPanel {
         button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                upateInfo(menu);
+                updateInfo(menu);
             }
         });
         panel.add(button);
@@ -97,7 +97,7 @@ public class MenuDisplayScreen extends KioskPanel {
         add(infoPanel, BorderLayout.SOUTH);
     }
 
-    private void upateInfo(Menu menu){
+    private void updateInfo(Menu menu){
         for(Component com : infoPanel.getComponents()){
             infoPanel.remove(com);
         }
@@ -158,7 +158,7 @@ public class MenuDisplayScreen extends KioskPanel {
         payButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                panelManager.changePanel(CART_PNAELNAME.getName());
+                panelManager.changePanel(CART_PANELNAME.getName());
             }
         });
         funPanel.add(payButton);
@@ -167,7 +167,7 @@ public class MenuDisplayScreen extends KioskPanel {
         backButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                panelManager.changePanel(INITAL_PANELNAME.getName());
+                panelManager.changePanel(INITIAL_PANELNAME.getName());
             }
         });
         funPanel.add(backButton);
