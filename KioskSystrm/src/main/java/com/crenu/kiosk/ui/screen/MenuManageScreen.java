@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Map;
 
 import com.crenu.kiosk.entity.Category;
 import com.crenu.kiosk.menu.Menu;
@@ -13,9 +14,11 @@ import static com.crenu.kiosk.KioskSystem.*;
 import static com.crenu.kiosk.entity.PanelName.*;
 
 public class MenuManageScreen extends KioskPanel {
-    JPanel menuListPanel;
-    JPanel menuEditPanel;
+    private JPanel menuListPanel;
+    private JPanel menuEditPanel;
 
+    private record MenuInfo(String name, Integer price, Category category){
+    };
 
     @Override
     public void init() {
@@ -64,12 +67,17 @@ public class MenuManageScreen extends KioskPanel {
         JComboBox<Category> categoryComboBox = new JComboBox<>(Category.values());
 
         btnAdd.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
+            public MenuInfo inputMenuInfo() {
+                // Retrieve values from UI components
                 String name = nameField.getText();
                 Integer price = Integer.parseInt(priceField.getText());
-                Category category = (Category)categoryComboBox.getSelectedItem();
-                addMenu(name, price, category);
+                Category category = (Category) categoryComboBox.getSelectedItem();
+                // Return a new instance of the MenuInfo record
+                return new MenuInfo(name, price, category);
+            }
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                addMenu(inputMenuInfo());
             }
         });
 
@@ -79,9 +87,8 @@ public class MenuManageScreen extends KioskPanel {
         menuEditPanel.add(btnAdd);
         add(menuEditPanel);
     }
-
-    public void addMenu(String name, Integer price, Category category){
-        Menu menu = new Menu(name, price, category);
+    public void addMenu(MenuInfo menuInformation){
+        Menu menu = new Menu(menuInformation.name(), menuInformation.price(), menuInformation.category());
         removeMenu(menu); //remove a menu with the same name
         menuManager.addMenuItem(menu);
         addMenuPanel(menu);
@@ -123,6 +130,4 @@ public class MenuManageScreen extends KioskPanel {
         menuListPanel.revalidate();
         menuListPanel.repaint();
     }
-
-
 }
