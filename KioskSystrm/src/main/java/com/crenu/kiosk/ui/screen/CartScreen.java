@@ -104,6 +104,7 @@ public class CartScreen extends KioskPanel {
         jd.setVisible(true);
     }
 
+
     private void initPayment(){
         JPanel paymentPanel = new JPanel();
         paymentPanel.setLayout(new GridLayout());
@@ -121,12 +122,15 @@ public class CartScreen extends KioskPanel {
         creditButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                int orderNum = orderSystem.addNowOrder();
-                showResultDialog(orderNum);
+                pay();
             }
         });
         paymentPanel.add(creditButton, BorderLayout.NORTH);
     }
 
+    public void pay(){
+        int orderNum = orderSystem.addNowOrder();
+        showResultDialog(orderNum);
+    }
 
 }

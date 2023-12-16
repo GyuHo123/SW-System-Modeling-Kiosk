@@ -14,6 +14,10 @@ import static com.crenu.kiosk.entity.PanelName.*;
 
 public class LoginScreen extends KioskPanel {
 
+
+    private JTextField userIDField;
+    private JPasswordField passwordField;
+
     @Override
     public void init() {
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
@@ -24,10 +28,8 @@ public class LoginScreen extends KioskPanel {
 
         btnLogin.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
-                if(checkCredentials(userIDField.getText(), String.valueOf(passwordField.getPassword()))){
-                    panelManager.changePanel(MANAGER_PANELNAME.getName());
-                };
+            public void actionPerformed(ActionEvent e){
+                login(userIDField.getText(), String.valueOf(passwordField.getPassword()));
             }
         });
 
@@ -44,6 +46,12 @@ public class LoginScreen extends KioskPanel {
             }
         });
         add(backButton, BorderLayout.SOUTH);
+    }
+
+    public void login(String id, String pw) {
+        if(checkCredentials(id, pw)){
+            panelManager.changePanel(MANAGER_PANELNAME.getName());
+        };
     }
 
     private boolean checkCredentials(String userID, String password) {
