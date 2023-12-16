@@ -130,6 +130,4 @@ public class MenuManageScreen extends KioskPanel {
         menuListPanel.revalidate();
         menuListPanel.repaint();
     }
-
-
 }
